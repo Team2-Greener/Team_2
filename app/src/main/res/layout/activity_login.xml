@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:id="@+id/login_email"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:inputType="textVisiblePassword"
+        android:layout_marginTop="300dp"
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/login_email"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPassword"
+        android:hint="Password" />
+
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="55dp"
+        android:text="로그인"
+        android:id="@+id/login_loginButton"
+        android:layout_below="@+id/login_password"
+        android:layout_alignStart="@+id/login_password"
+        android:background="@color/darkGray"
+        android:layout_alignLeft="@+id/login_password" />
+
+    <Button
+        android:id="@+id/login_signupButton"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
+        android:text="회원 가입"
+        android:layout_alignTop="@+id/login_loginButton"
+        android:background="@color/darkGray"
+        android:layout_alignEnd="@+id/login_password"
+        android:layout_alignRight="@+id/login_password" />
+
+    <TextView
+        android:id="@+id/login_findPW_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호를 잊으셨나요?"
+        android:textSize="15dp"
+        android:layout_below="@+id/login_signupButton"
+        android:layout_toLeftOf="@+id/login_findPwBtn"
+        android:textColor="@color/darkGray"/>
+
+    <Button
+        android:id="@+id/login_findPwBtn"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/login_signupButton"
+        android:layout_alignRight="@id/login_password"
+        android:background="@color/darkGray"
+        android:text="비밀번호 찾기" />
+
+
+
+</RelativeLayout>
