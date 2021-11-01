@@ -43,13 +43,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if(SaveSharedPreference.getUserName(LoginActivity.this).length() == 0) {
             // call Login Activity
-            intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("STD_NUM", SaveSharedPreference.getUserName(this).toString());
-            startActivity(intent);
-            this.finish();
         } else {
             // Call Next Activity
-            intent = new Intent(LoginActivity.this, LoginActivity.class);
+            intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("STD_NUM", SaveSharedPreference.getUserName(this).toString());
             startActivity(intent);
             this.finish();
         }
@@ -95,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = ((EditText)findViewById(R.id.login_password)).getText().toString().trim();
         CheckBox checkBox = findViewById(R.id.autoLoginCheck) ;
 
-        if(checkBox.isChecked() == true) SaveSharedPreference.setUserName(LoginActivity.this, email);
+        //if(checkBox.isChecked() == true) SaveSharedPreference.setUserName(LoginActivity.this, email);
 
         if(email.length() >0 && password.length() >0){
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
