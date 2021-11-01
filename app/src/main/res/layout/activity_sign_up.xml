@@ -109,31 +109,6 @@
         android:hint="비밀번호를 한 번 더 입력하세요"
         android:layout_centerHorizontal="true" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/inputPasswordConfirm"
-        android:layout_alignLeft="@+id/inputPasswordConfirm">
-
-        <RadioButton
-            android:id="@+id/Male"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Male"
-            />
-
-        <RadioButton
-            android:id="@+id/Female"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Female"/>
-
-    </RadioGroup>
-
     <Button
         android:id="@+id/signupedButton"
         android:layout_width="wrap_content"

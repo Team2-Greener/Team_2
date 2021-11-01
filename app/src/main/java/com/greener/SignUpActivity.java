@@ -28,11 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private EditText username_edit, email_edit, password_edit, checkPWD_edit;
     Button register_button;
-    private boolean isChanged = false;
     private boolean isCompleted = false;
-    private Object View;
-    private RadioButton Male_btn, Female_btn;
-    private RadioGroup radioGroup;
     private BackPressHandler backPressHandler = new BackPressHandler(this);
 
     @Override
@@ -49,41 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
         findViewById(R.id.back_login).setOnClickListener(onClickListener);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        Male_btn=(RadioButton)findViewById(R.id.Male);
-        Female_btn=(RadioButton)findViewById(R.id.Female);
-        Male_btn.setOnClickListener(radioButtonClickListener);
-        Female_btn.setOnClickListener(radioButtonClickListener);
-        radioGroup=(RadioGroup)findViewById(R.id.radioGroup);
-        radioGroup.setOnCheckedChangeListener(radioGroupButtonchangeListener);
-
     }
-    public static int gender=0;
-    public static int check;
-    boolean isChecked = false;
-    RadioButton.OnClickListener radioButtonClickListener = new RadioButton.OnClickListener(){
 
-
-        @Override
-        public void onClick(android.view.View v) {
-            isChecked=true;
-
-        }
-    };
-    RadioGroup.OnCheckedChangeListener radioGroupButtonchangeListener = new RadioGroup.OnCheckedChangeListener(){
-
-        @Override
-        public void onCheckedChanged(RadioGroup group, @IdRes int i) {
-            if(i==R.id.Male){
-                gender = 1;
-                isChecked = true;
-            }
-            else if(i==R.id.Female){
-                gender = 2;
-                isChecked = true;
-
-            }
-        }
-    };
     View.OnClickListener onClickListener = new View.OnClickListener(){
 
         @Override
@@ -114,10 +77,8 @@ public class SignUpActivity extends AppCompatActivity {
         String passwordCheck = checkPWD_edit.getText().toString().trim();
 
 
-        if(name.length() > 0 && email.length() >0 && password.length() >0 && passwordCheck.length()>0 && (isChecked == true && (gender == 1 || gender==2))){
+        if(name.length() > 0 && email.length() >0 && password.length() >0 && passwordCheck.length()>0){
 
-            check=gender;
-            Log.d("check",String.valueOf(check));
             if(password.length() < 9){
                 startToast("비밀번호를 9자리 이상 입력해 주십시오.");
             }

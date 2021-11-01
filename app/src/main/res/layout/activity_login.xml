@@ -44,13 +44,22 @@
         android:layout_alignEnd="@+id/login_password"
         android:layout_alignRight="@+id/login_password" />
 
+    <CheckBox
+        android:text="자동로그인"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_signupButton"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/autoLoginCheck"
+        />
+
     <TextView
         android:id="@+id/login_findPW_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호를 잊으셨나요?"
         android:textSize="15dp"
-        android:layout_below="@+id/login_signupButton"
+        android:layout_below="@+id/autoLoginCheck"
         android:layout_toLeftOf="@+id/login_findPwBtn"
         android:textColor="@color/darkGray"/>
 
@@ -58,7 +67,7 @@
         android:id="@+id/login_findPwBtn"
         android:layout_width="100dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/login_signupButton"
+        android:layout_below="@+id/autoLoginCheck"
         android:layout_alignRight="@id/login_password"
         android:background="@color/darkGray"
         android:text="비밀번호 찾기" />
