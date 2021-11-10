@@ -48,14 +48,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull NaverMap naverMap)
     {
         // 지도상에 마커 표시
-        Marker marker = new Marker();
-        marker.setPosition(new LatLng(37.5670135, 126.9783740));
-        marker.setMap(naverMap);
+        Marker marker = new Marker(); // 마커 생성
+        marker.setPosition(new LatLng(37.5670135, 126.9783740)); // 마커 위치 찍기
+        marker.setMap(naverMap); // 마커 지도에 넣기
 
+        // 커스텀 마커
         marker.setWidth(100);
         marker.setHeight(100);
-        marker.setIcon(OverlayImage.fromResource(R.drawable.ic_place_marker));
-        marker.setOnClickListener(this);
+        marker.setIcon(OverlayImage.fromResource(R.drawable.ic_place_marker)); // 마커 이미지 넣기
+        marker.setOnClickListener(this); // 마커 click listener 등록
 
         // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
         mNaverMap = naverMap;
