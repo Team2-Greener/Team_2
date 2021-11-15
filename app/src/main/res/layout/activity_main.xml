@@ -14,6 +14,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="40dp"
         app:layout_constraintHorizontal_bias="0.506"
+        tools:ignore="MissingConstraints" />
     <!-- 네이버 지도 -->
     <com.naver.maps.map.MapView
         android:id="@+id/map_view"
