@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ListView
+        android:id="@+id/HotelListView"
+        android:layout_width="337dp"
+        android:layout_height="411dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintHorizontal_bias="0.506"
+        tools:ignore="MissingConstraints" />
     <!-- 네이버 지도 -->
     <com.naver.maps.map.MapView
         android:id="@+id/map_view"
