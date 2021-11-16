@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ff0000">
+
+    <Button
+        android:id="@+id/back_login"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/toleft"/>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/signup_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registration"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signup_toolbar"
+        android:layout_alignLeft="@+id/inputName"
+        android:layout_marginTop="15dp"
+        android:text="Name"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textName"
+        android:inputType="textPersonName"
+        android:hint="이름을 입력하세요"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textEmailCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputName"
+        android:layout_alignLeft="@+id/inputName"
+        android:layout_marginTop="15dp"
+        android:text="Email"
+        android:textSize="15dp" />
+
+
+    <EditText
+        android:id="@+id/inputEmailCheck"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textEmailCheck"
+        android:layout_alignLeft="@+id/textEmailCheck"
+        android:hint="이메일을 입력하세요"
+        android:inputType="textEmailAddress"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputEmailCheck"
+        android:layout_alignLeft="@+id/inputEmailCheck"
+        android:layout_marginTop="15dp"
+        android:text="password"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/inputPassword"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textPassword"
+        android:inputType="textPassword"
+        android:hint="비밀번호를 입력하세요"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textPasswordConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputPassword"
+        android:layout_alignLeft="@+id/inputPassword"
+        android:layout_marginTop="15dp"
+        android:text="check P/W"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/inputPasswordConfirm"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textPasswordConfirm"
+        android:inputType="textPassword"
+        android:hint="비밀번호를 한 번 더 입력하세요"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/signupedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/inputPasswordConfirm"
+        android:layout_centerHorizontal="true"
+        android:text="assign"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:background="@color/green"/>
+/>
+
+</RelativeLayout>
+

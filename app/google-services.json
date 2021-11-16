@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "919978607633",
+    "project_id": "greener-30b0c",
+    "storage_bucket": "greener-30b0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919978607633:android:d84786ae0a291a34595db0",
+        "android_client_info": {
+          "package_name": "com.greener"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919978607633-l95lc7vrv00nnalthhumgun38pfqoh0b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.greener",
+            "certificate_hash": "6f17d3ed69f37837ca95f90febf3bdd7f3d20b2d"
+          }
+        },
+        {
+          "client_id": "919978607633-qkobehvem7j6465tmlbjafllgjmtpjmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3zXxzpVM5GxvpePNz6Cl3xPtmKRiUq7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919978607633-qkobehvem7j6465tmlbjafllgjmtpjmd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
