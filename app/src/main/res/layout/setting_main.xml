@@ -5,11 +5,4 @@
     android:orientation="horizontal"
     android:background="#ACACAC">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Setting"
-        android:textSize="50sp"/>
-
-
 </LinearLayout>

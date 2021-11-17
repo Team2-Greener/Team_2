@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".SearchMain">
 
+    <Button
+        android:id="@+id/goback_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/toleft"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,15 +15,18 @@
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_setting.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_shop.xml" value="0.12" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_shop_map.xml" value="0.1" />
-        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_sign_up.xml" value="0.3396825396825397" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/fragment_shop_main.xml" value="0.1" />
-        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/hotel_main.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/hotel_main.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/hotel_map.xml" value="0.15520833333333334" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/hotellist_item.xml" value="0.15520833333333334" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/liked_main.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/liked_map.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/likedlist_item.xml" value="0.15520833333333334" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/list_item.xml" value="0.15208333333333332" />
-        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/search_main.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/media_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/search_main.xml" value="0.264" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/setting_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/shop_info.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/shop_main.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/shop_map.xml" value="0.1" />
@@ -31,6 +34,9 @@
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/singer_item.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/singleItem.xml" value="0.15989583333333332" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/view_info_window.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/menu/actionbar_action.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/menu/actionbar_list_action.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/menu/actionbar_map_action.xml" value="0.2" />
       </map>
     </option>
   </component>

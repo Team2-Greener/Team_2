@@ -16,10 +16,10 @@ import java.util.ArrayList;
 
 public class HotelViewAdapter extends RecyclerView.Adapter<HotelViewAdapter.ViewHolder> {
 
-    private ArrayList<ShopList> arrayList;
+    private ArrayList<HotelList> arrayList;
     private Context context;
 
-    public HotelViewAdapter(ArrayList<ShopList> arrayList, Context context) {
+    public HotelViewAdapter(ArrayList<HotelList> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -37,9 +37,9 @@ public class HotelViewAdapter extends RecyclerView.Adapter<HotelViewAdapter.View
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(holder.itemView).load(arrayList.get(position).getShopImage()).into(holder.hotel_image);
-        holder.hotel_name.setText(arrayList.get(position).getShopName());
-        holder.hotel_telNum.setText(arrayList.get(position).getShopTel());
+        Glide.with(holder.itemView).load(arrayList.get(position).getHotelImage()).into(holder.hotel_image);
+        holder.hotel_name.setText(arrayList.get(position).getHotelName());
+        holder.hotel_telNum.setText(arrayList.get(position).getHotelTel());
     }
 
     // 몇개의 데이터를 리스트로 뿌려줘야하는지 반드시 정의해줘야한다

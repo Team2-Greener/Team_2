@@ -1,15 +1,20 @@
 package com.greener;
 
 import androidx.annotation.NonNull;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +47,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LikedMain liked_main;
     private MediaMain media_main;
     private SettingMain setting_main;
+    private ShopMap shop_map;
+    private HotelMap hotel_map;
+    private LikedMap liked_map;
+
+    private MenuItem search_menu;
+    private Menu menu;
+    private int fragNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // 위치를 반환하는 구현체인 FusedLocationSource 생성
         mLocationSource = new FusedLocationSource(this, 100);
 
-        //타이틀 바 없애기
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        //Toolbar 추가하기
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         //화면 전환
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -68,19 +80,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.shop_menu:
+                        //list Toolbar 추가하기
+                        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_list);
+                        setSupportActionBar(toolbar);
+
                         setFragment(0);
+                        fragNum = 0;
                         break;
                     case R.id.hotel_menu:
                         setFragment(1);
+                        fragNum = 1;
                         break;
                     case R.id.liked_menu:
                         setFragment(2);
+                        fragNum = 2;
                         break;
                     case R.id.media_menu:
                         setFragment(3);
+                        fragNum = 3;
                         break;
                     case R.id.setting_menu:
                         setFragment(4);
+                        fragNum = 4;
                         break;
                 }
                 return false;
@@ -91,7 +112,53 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         liked_main = new LikedMain();
         media_main = new MediaMain();
         setting_main = new SettingMain();
-        setFragment(0);
+        shop_map = new ShopMap();
+        hotel_map = new HotelMap();
+        liked_map = new LikedMap();
+
+        setFragment(fragNum);
+
+    }
+
+    public boolean OnCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar_list_action, menu);
+
+        //검색버튼 등록
+        search_menu = menu.findItem(R.id.search_action);
+        //searchView 크기 꽉차도록
+        SearchView searchView = (SearchView) search_menu.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setQueryHint("검색어를 입력하세요");
+
+        //검색 클릭하면 SearchMain으로 이동
+        search_menu.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), SearchMain.class);
+                startActivity(intent);
+
+                return true;
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.search_action) {
+            //search 구현
+        }
+        else if(id == R.id.map_view_action) {
+            System.out.println("map_view call");
+
+            setFragment(fragNum+5);
+        }
+        return true;
     }
 
 
@@ -225,6 +292,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case 4:
                 transaction.replace(R.id.main_frame, setting_main);
+                transaction.commit();
+                break;
+            case 5:
+                transaction.replace(R.id.main_frame, shop_map);
+                transaction.commit();
+                break;
+            case 6:
+                transaction.replace(R.id.main_frame, hotel_map);
+                transaction.commit();
+                break;
+            case 7:
+                transaction.replace(R.id.main_frame, liked_map);
                 transaction.commit();
                 break;
         }
