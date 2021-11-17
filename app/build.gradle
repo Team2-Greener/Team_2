@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.greener"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -45,4 +45,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics' // 파이어베이스 연동
     implementation 'com.naver.maps:map-sdk:3.13.0' // 네이버 지도 SDK
     implementation 'com.google.android.gms:play-services-location:17.0.0' // FusedLocationSource
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'    //이미지뷰 불러오는 라이브러리
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:27.1.' //툴바
 }

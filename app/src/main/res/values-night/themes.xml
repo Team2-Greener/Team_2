@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Greener" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Greener" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorPrimaryVariant">@color/dark_greenr</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -11,6 +11,19 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <!-- Toolbar style. -->
+        <item name="toolbarStyle">@style/ToolbarStyle.Dark</item>
+
+        <!--Customize your theme here. -->
+    </style>
+    <!--Toolbar 스타일-->
+    <style name="ToolbarStyle.Dark" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/main_color</item> <!-- Toolbar의 배경색-->
+        <item name="titleTextAppearance">@color/dark_greenr</item> <!-- Toolbar의 타이틀 텍스트-->
+        <item name="subtitleTextAppearance">@color/dark_greenr</item> <!-- Toolbar의 서브타이틀 텍스트-->
     </style>
 </resources>

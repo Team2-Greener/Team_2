@@ -14,23 +14,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Greener">
         <activity
-            android:name=".LikedActivity"
+            android:name=".SearchMain"
+            android:exported="true" />
+        <activity
+            android:name=".LikedMain"
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".SettingActivity"
+            android:name=".SettingMain"
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".MediaActivity"
+            android:name=".MediaMain"
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".HotelActivity"
+            android:name=".HotelMain"
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".ShopActivity"
+            android:name=".ShopMain"
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity android:name=".SignUpActivity" />
