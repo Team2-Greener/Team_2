@@ -4,15 +4,11 @@ import androidx.annotation.NonNull;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.Manifest;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,11 +37,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FragmentManager manager;
     private FragmentTransaction transaction;
 
-    private ShopActivity shop_main;
-    private HotelActivity hotel_main;
-    private LikedActivity liked_main;
-    private MediaActivity media_main;
-    private SettingActivity setting_main;
+    private ShopMain shop_main;
+    private HotelMain hotel_main;
+    private LikedMain liked_main;
+    private MediaMain media_main;
+    private SettingMain setting_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -90,11 +86,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return false;
             }
         });
-        shop_main = new ShopActivity();
-        hotel_main = new HotelActivity();
-        liked_main = new LikedActivity();
-        media_main = new MediaActivity();
-        setting_main = new SettingActivity();
+        shop_main = new ShopMain();
+        hotel_main = new HotelMain();
+        liked_main = new LikedMain();
+        media_main = new MediaMain();
+        setting_main = new SettingMain();
         setFragment(0);
     }
 

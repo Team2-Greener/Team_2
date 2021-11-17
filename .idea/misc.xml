@@ -3,14 +3,34 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/drawable-v24/main_layout_bottom_bar.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/drawable/ic_place_marker.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_hotel.xml" value="0.136" />
-        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_liked.xml" value="0.22192028985507245" />
-        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_login.xml" value="0.22192028985507245" />
-        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_liked.xml" value="0.136" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_login.xml" value="0.10400000000000001" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_media.xml" value="0.22192028985507245" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_setting.xml" value="0.1" />
-        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_shop.xml" value="0.136" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_shop.xml" value="0.12" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_shop_map.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/activity_sign_up.xml" value="0.3396825396825397" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/fragment_shop_main.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/hotel_main.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/hotel_map.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/hotellist_item.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/liked_main.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/likedlist_item.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/list_item.xml" value="0.15208333333333332" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/search_main.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/shop_info.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/shop_main.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/shop_map.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/shoplist_item.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/singer_item.xml" value="0.1" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/singleItem.xml" value="0.15989583333333332" />
+        <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/layout/view_info_window.xml" value="0.1" />
       </map>
     </option>
   </component>
