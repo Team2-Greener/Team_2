@@ -1,9 +1,6 @@
 package com.greener;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,9 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.ListFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -27,27 +27,26 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
+public class CustomListFragment extends ListFragment {
+  /*  ListViewAdapter adapter ;
+    String image_name,name_eng;
+    private Context context;
 
-public class HotelActivity extends Fragment {
-
-    private View view;
-    String image_name, name_eng;
-    ArrayList<com.greener.HotelActivity.Hotel> hotels;
-    ListView customListView;
-    private static CustomAdapter customAdapter;
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        System.out.println("Hotel activity changed");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.activity_hotel, container, false);
+        context = container.getContext();
 
-        hotels = new ArrayList<>();
+        // Adapter 생성 및 Adapter 지정.
+        adapter = new ListViewAdapter() ;
+        setListAdapter(adapter) ;
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
         StorageReference pathReference = storageReference.child("hotel");
+
+
         boolean calledAlready = false;
         if (!calledAlready) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true); // 다른 인스턴스보다 먼저 실행되어야 한다.
@@ -60,28 +59,38 @@ public class HotelActivity extends Fragment {
         databaseRef.child("이름").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 // 클래스 모델이 필요?
                 for (DataSnapshot fileSnapshot : dataSnapshot.getChildren()) {
                     //MyFiles filename = (MyFiles) fileSnapshot.getValue(MyFiles.class);
                     //하위키들의 value를 어떻게 가져오느냐???
                     image_name = fileSnapshot.getKey();
                     Log.d("NAME IS : ", image_name);
+
                     name_eng = fileSnapshot.getValue(String.class);
                     Log.i("TAG: value is ", name_eng);
-                    Log.d("ADD HOTEL : ",name_eng);
 
                     if (pathReference == null) {
-                        Toast.makeText(container.getContext(), "저장소에 사진이 없습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "저장소에 사진이 없습니다.", Toast.LENGTH_SHORT).show();
                     } else {
                         StorageReference submitProfile = pathReference.child(name_eng+".jpg");
+                        Log.d("STORAGE ADDRESS : ", submitProfile.toString());
+
                         submitProfile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Toast.makeText(container.getContext(), uri.toString(), Toast.LENGTH_SHORT).show();
+                                Glide.with(context)
+                                        .load(uri)
+                                        .into(new CustomTarget<Drawable>() {
+                                            @Override
+                                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                                adapter.addItem(resource, image_name, name_eng);
+                                            }
 
-                                hotels.add(new Hotel(uri.toString(),name_eng,"text예시" ));
-                                Log.d("STORAGE ADDRESS : ", submitProfile.toString());
-
+                                            @Override
+                                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                                            }
+                                        });
                             }
                         });
                     }
@@ -94,45 +103,6 @@ public class HotelActivity extends Fragment {
             }
         });
 
-        customListView = view.findViewById(R.id.listview);
-        customAdapter = new CustomAdapter(getContext(),hotels);
-        customListView.setAdapter(customAdapter);
-        Toast.makeText(getContext(), "finish", Toast.LENGTH_SHORT).show();
-
-        customListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
-                //각 아이템을 분간 할 수 있는 position과 뷰
-                String selectedItem = (String) view.findViewById(R.id.title).getTag().toString();
-                Toast.makeText(getContext(), "Clicked: " + position +" " + selectedItem, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        return view;
-    }
-    //data class
-    static class Hotel {
-        private String image_uri;
-        private String title;
-        private String text;
-
-        public Hotel(String image_uri, String title, String text) {
-            this.image_uri = image_uri;
-            this.title = title;
-            this.text = text;
-        }
-
-        public String getImage_uri() {
-            return image_uri;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getText() {
-            return text;
-        }
-    }
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }*/
 }
