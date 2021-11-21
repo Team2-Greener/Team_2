@@ -4,28 +4,42 @@ import android.net.Uri;
 
 public class ListViewItem {
     private String imageUri;
-    private String titleStr ;
-    private String ContentStr ;
+    private String nameStr ;
+    private String addressStr ;
+    private String callStr;
 
-    public void setImage(String uri) { imageUri = uri ; }
-    public void setTitle(String title) {
-        titleStr = title ;
-    }
-    public void setContent(String text) {
-        ContentStr = text ;
+    public String getImageUri() {
+        return imageUri;
     }
 
-    public String getImage() { return this.imageUri; }
-    public String getTitle() {
-        return this.titleStr ;
-    }
-    public String getContent() {
-        return this.ContentStr ;
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 
-    public ListViewItem(String uri, String titleStr, String ContentStr) {
-        this.imageUri = uri;
-        this.titleStr = titleStr;
-        this.ContentStr = ContentStr;
+    public String getNameStr() {
+        return nameStr;
+    }
+
+    public void setNameStr(String nameStr) {
+        this.nameStr = nameStr;
+    }
+
+    public String getAddressStr() {
+        return addressStr;
+    }
+
+    public void setAddressStr(String addressStr) {
+        this.addressStr = addressStr;
+    }
+
+    public String getCallStr() {
+        return callStr;
+    }
+
+    public void setCallStr(String callStr) {
+        this.callStr = callStr;
+    }
+
+    public ListViewItem() {
     }
 }
