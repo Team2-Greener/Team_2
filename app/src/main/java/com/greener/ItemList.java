@@ -1,12 +1,14 @@
 package com.greener;
 
-import android.net.Uri;
-
-public class ListViewItem {
+public class ItemList {
     private String imageUri;
     private String nameStr ;
     private String addressStr ;
     private String callStr;
+
+    public ItemList() {
+
+    }
 
     public String getImageUri() {
         return imageUri;
@@ -38,8 +40,5 @@ public class ListViewItem {
 
     public void setCallStr(String callStr) {
         this.callStr = callStr;
-    }
-
-    public ListViewItem() {
     }
 }

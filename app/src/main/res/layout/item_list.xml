@@ -11,21 +11,21 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/shop_image"
+            android:id="@+id/store_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="5dp"
             android:src="@drawable/sample" />
 
         <TextView
-            android:id="@+id/shop_name"
+            android:id="@+id/store_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="가게이름" />
 
         <TextView
-            android:id="@+id/shop_telNum"
+            android:id="@+id/store_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

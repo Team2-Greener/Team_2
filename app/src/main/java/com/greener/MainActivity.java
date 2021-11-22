@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLocationSource = new FusedLocationSource(this, 100);
 
         //list Toolbar 추가하기
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_list);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //화면 전환
