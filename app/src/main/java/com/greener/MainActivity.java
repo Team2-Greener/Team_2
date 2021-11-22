@@ -3,6 +3,8 @@ package com.greener;
 import androidx.annotation.NonNull;
 
 import android.content.Intent;
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +14,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
