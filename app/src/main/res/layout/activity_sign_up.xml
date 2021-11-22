@@ -113,13 +113,13 @@
         android:id="@+id/signupedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:layout_below="@+id/inputPasswordConfirm"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@color/green"
         android:text="assign"
-        android:textSize="15dp"
         android:textColor="@color/white"
-        android:background="@color/green"/>
+        android:textSize="15dp" />
 />
 
 </RelativeLayout>
