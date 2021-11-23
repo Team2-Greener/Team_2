@@ -2,6 +2,8 @@ package com.greener;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,10 +20,18 @@ public class HotelMap extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         System.out.println("Hotel Map changed");
 
+        setHasOptionsMenu(true);
+
         view = inflater.inflate(R.layout.hotel_map, container, false);
 
-
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.actionbar_map_action, menu);
     }
 
 }
