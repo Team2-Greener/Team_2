@@ -14,12 +14,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
+public class MediaViewAdapter extends RecyclerView.Adapter<MediaViewAdapter.ViewHolder> {
 
-    private ArrayList<ItemList> arrayList;
+    private ArrayList<MediaList> arrayList;
     private Context context;
 
-    public ViewAdapter(ArrayList<ItemList> arrayList, Context context) {
+    public MediaViewAdapter(ArrayList<MediaList> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -28,7 +28,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_list, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
         return holder;
@@ -39,9 +39,8 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getImageUri())
-                .into(holder.store_image);
-        holder.store_name.setText(arrayList.get(position).getNameStr());
-        holder.store_address.setText(arrayList.get(position).getAddressStr());
+                .into(holder.media_image);
+        holder.media_title.setText(arrayList.get(position).getTitleStr());
     }
 
     // 몇개의 데이터를 리스트로 뿌려줘야하는지 반드시 정의해줘야한다
@@ -51,16 +50,14 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView store_image;
-        TextView store_name;
-        TextView store_address;
+        ImageView media_image;
+        TextView media_title;
 
         public ViewHolder (@NonNull View itemView) {
             super(itemView);
 
-            this.store_image = itemView.findViewById(R.id.store_image);
-            this.store_name = itemView.findViewById(R.id.store_name);
-            this.store_address = itemView.findViewById(R.id.store_address);
+            this.media_image = itemView.findViewById(R.id.media_image);
+            this.media_title = itemView.findViewById(R.id.media_title);
         }
 
     }
