@@ -1,12 +1,12 @@
 package com.greener;
 
-public class ItemList {
+public class StoreList {
     private String imageUri;
     private String nameStr ;
     private String addressStr ;
     private String callStr;
 
-    public ItemList() {
+    public StoreList() {
 
     }
 

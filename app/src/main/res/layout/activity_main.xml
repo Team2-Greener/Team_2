@@ -19,17 +19,6 @@
 
     </ListView>
 
-    <FrameLayout
-        android:id="@+id/main_frame"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/HotelListView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/HotelListView">
-
-    </FrameLayout>
-
     <!-- 네이버 지도 -->
     <com.naver.maps.map.MapView
         android:id="@+id/map_view"
@@ -59,5 +48,15 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         tools:ignore="MissingConstraints" />
+
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/HotelListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/HotelListView">
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
