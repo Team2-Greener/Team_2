@@ -22,9 +22,18 @@ public class ShopMap extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         System.out.println("Shop Map changed");
 
+        setHasOptionsMenu(true);
+
         view = inflater.inflate(R.layout.shop_map, container, false);
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.actionbar_map_action, menu);
     }
 
 }

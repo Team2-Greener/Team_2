@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // 위치를 반환하는 구현체인 FusedLocationSource 생성
         mLocationSource = new FusedLocationSource(this, 100);
 
-        //list Toolbar 추가하기
+        //Toolbar 추가하기
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -153,6 +153,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if(id == R.id.search_action) {
             //todo search 구현 && bottombar 지우기
+        }
+        else if(id == R.id.list_view_action) {
+            System.out.println("list_view call");
+
+            setFragment(fragNum);
         }
         else if(id == R.id.map_view_action) {
             System.out.println("map_view call");
