@@ -3,16 +3,20 @@ package com.greener;
 import androidx.annotation.NonNull;
 
 import android.content.Intent;
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
@@ -32,6 +37,8 @@ import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, Overlay.OnClickListener {
+
+    public static FirebaseDatabase database;
 
     private MapView mapView;
     private NaverMap mNaverMap;
@@ -52,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LikedMap liked_map;
 
     private MenuItem search_menu;
-    private Menu menu;
     private int fragNum = 0;
 
     @Override
@@ -60,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
 
         //네이버 지도
         mapView = (MapView) findViewById(R.id.map_view);
@@ -80,10 +89,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.shop_menu:
-                        //list Toolbar 추가하기
-                        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_list);
-                        setSupportActionBar(toolbar);
-
                         setFragment(0);
                         fragNum = 0;
                         break;
@@ -120,7 +125,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    public boolean OnCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //toolbar menu 구성
         getMenuInflater().inflate(R.menu.actionbar_list_action, menu);
 
         //검색버튼 등록
@@ -151,7 +158,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         int id = item.getItemId();
 
         if(id == R.id.search_action) {
-            //search 구현
+            //todo search 구현 && bottombar 지우기
+        }
+        else if(id == R.id.list_view_action) {
+            System.out.println("list_view call");
+
+            setFragment(fragNum);
         }
         else if(id == R.id.map_view_action) {
             System.out.println("map_view call");
@@ -270,28 +282,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return false;
     }
 
+    //Fragment 이동
     private void setFragment(int n){
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
         switch(n){
             case 0:
-                transaction.replace(R.id.main_frame, shop_main);
-                transaction.commit();   //save
+                transaction.replace(R.id.main_frame, shop_main);    //shop_main으로 이동
+                transaction.commit();   //상태 save
                 break;
             case 1:
-                transaction.replace(R.id.main_frame, hotel_main);
+                transaction.replace(R.id.main_frame, hotel_main);   //hotel_main으로 이동
                 transaction.commit();
                 break;
             case 2:
-                transaction.replace(R.id.main_frame, liked_main);
+                transaction.replace(R.id.main_frame, liked_main);   //liked_main으로 이동
                 transaction.commit();
                 break;
             case 3:
-                transaction.replace(R.id.main_frame, media_main);
+                transaction.replace(R.id.main_frame, media_main);   //media_main으로 이동
                 transaction.commit();
                 break;
             case 4:
-                transaction.replace(R.id.main_frame, setting_main);
+                transaction.replace(R.id.main_frame, setting_main); //setting_main으로 이동
                 transaction.commit();
                 break;
             case 5:

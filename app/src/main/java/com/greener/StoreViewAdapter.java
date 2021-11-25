@@ -14,12 +14,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class HotelViewAdapter extends RecyclerView.Adapter<HotelViewAdapter.ViewHolder> {
+public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.ViewHolder> {
 
-    private ArrayList<HotelList> arrayList;
+    private ArrayList<StoreList> arrayList;
     private Context context;
 
-    public HotelViewAdapter(ArrayList<HotelList> arrayList, Context context) {
+    public StoreViewAdapter(ArrayList<StoreList> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -28,7 +28,7 @@ public class HotelViewAdapter extends RecyclerView.Adapter<HotelViewAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hotellist_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.store_list, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
         return holder;
@@ -37,9 +37,11 @@ public class HotelViewAdapter extends RecyclerView.Adapter<HotelViewAdapter.View
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(holder.itemView).load(arrayList.get(position).getHotelImage()).into(holder.hotel_image);
-        holder.hotel_name.setText(arrayList.get(position).getHotelName());
-        holder.hotel_telNum.setText(arrayList.get(position).getHotelTel());
+        Glide.with(holder.itemView)
+                .load(arrayList.get(position).getImageUri())
+                .into(holder.store_image);
+        holder.store_name.setText(arrayList.get(position).getNameStr());
+        holder.store_address.setText(arrayList.get(position).getAddressStr());
     }
 
     // 몇개의 데이터를 리스트로 뿌려줘야하는지 반드시 정의해줘야한다
@@ -49,16 +51,16 @@ public class HotelViewAdapter extends RecyclerView.Adapter<HotelViewAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView hotel_image;
-        TextView hotel_name;
-        TextView hotel_telNum;
+        ImageView store_image;
+        TextView store_name;
+        TextView store_address;
 
         public ViewHolder (@NonNull View itemView) {
             super(itemView);
 
-            this.hotel_image = itemView.findViewById(R.id.hotel_image);
-            this.hotel_name = itemView.findViewById(R.id.hotel_name);
-            this.hotel_telNum = itemView.findViewById(R.id.hotel_telNum);
+            this.store_image = itemView.findViewById(R.id.store_image);
+            this.store_name = itemView.findViewById(R.id.store_name);
+            this.store_address = itemView.findViewById(R.id.store_address);
         }
 
     }

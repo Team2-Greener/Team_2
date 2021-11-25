@@ -14,12 +14,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class ShopViewAdapter extends RecyclerView.Adapter<ShopViewAdapter.ViewHolder> {
+public class MediaViewAdapter extends RecyclerView.Adapter<MediaViewAdapter.ViewHolder> {
 
-    private ArrayList<ShopList> arrayList;
+    private ArrayList<MediaList> arrayList;
     private Context context;
 
-    public ShopViewAdapter(ArrayList<ShopList> arrayList, Context context) {
+    public MediaViewAdapter(ArrayList<MediaList> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -28,7 +28,7 @@ public class ShopViewAdapter extends RecyclerView.Adapter<ShopViewAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shoplist_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_list, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
         return holder;
@@ -37,9 +37,10 @@ public class ShopViewAdapter extends RecyclerView.Adapter<ShopViewAdapter.ViewHo
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(holder.itemView).load(arrayList.get(position).getShopImage()).into(holder.shop_image);
-        holder.shop_name.setText(arrayList.get(position).getShopName());
-        holder.shop_telNum.setText(arrayList.get(position).getShopTel());
+        Glide.with(holder.itemView)
+                .load(arrayList.get(position).getImageUri())
+                .into(holder.media_image);
+        holder.media_title.setText(arrayList.get(position).getTitleStr());
     }
 
     // 몇개의 데이터를 리스트로 뿌려줘야하는지 반드시 정의해줘야한다
@@ -49,16 +50,14 @@ public class ShopViewAdapter extends RecyclerView.Adapter<ShopViewAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView shop_image;
-        TextView shop_name;
-        TextView shop_telNum;
+        ImageView media_image;
+        TextView media_title;
 
         public ViewHolder (@NonNull View itemView) {
             super(itemView);
 
-            this.shop_image = itemView.findViewById(R.id.shop_image);
-            this.shop_name = itemView.findViewById(R.id.shop_name);
-            this.shop_telNum = itemView.findViewById(R.id.shop_telNum);
+            this.media_image = itemView.findViewById(R.id.media_image);
+            this.media_title = itemView.findViewById(R.id.media_title);
         }
 
     }
