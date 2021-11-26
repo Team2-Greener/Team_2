@@ -16,11 +16,7 @@ public class MediaList {
         this.imageUri = imageUri;
     }
 
-    public String getTitleStr() {
-        return titleStr;
-    }
+    public String getTitleStr() { return titleStr; }
 
-    public void setTitleStr(String titleStr) {
-        this.titleStr = titleStr;
-    }
+    public void setTitleStr(String titleStr) { this.titleStr = titleStr; }
 }

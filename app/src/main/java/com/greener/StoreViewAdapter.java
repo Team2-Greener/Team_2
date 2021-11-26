@@ -1,6 +1,8 @@
 package com.greener;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.ViewHolder> {
+public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.StoreViewHolder> {
 
     private ArrayList<StoreList> arrayList;
     private Context context;
@@ -27,18 +29,19 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.View
     // ViewHolder 생성
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public StoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.store_list, parent, false);
-        ViewHolder holder = new ViewHolder(view);
+        StoreViewHolder holder = new StoreViewHolder(view);
 
         return holder;
     }
 
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StoreViewHolder holder, int position) {
+        Log.d("STORE VALUE ",arrayList.get(position).getImageUri());
         Glide.with(holder.itemView)
-                .load(arrayList.get(position).getImageUri())
+                .load(Uri.parse(arrayList.get(position).getImageUri()))
                 .into(holder.store_image);
         holder.store_name.setText(arrayList.get(position).getNameStr());
         holder.store_address.setText(arrayList.get(position).getAddressStr());
@@ -50,12 +53,12 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.View
         return (arrayList != null ? arrayList.size() : 0); // RecyclerView의 size return
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class StoreViewHolder extends RecyclerView.ViewHolder {
         ImageView store_image;
         TextView store_name;
         TextView store_address;
 
-        public ViewHolder (@NonNull View itemView) {
+        public StoreViewHolder (@NonNull View itemView) {
             super(itemView);
 
             this.store_image = itemView.findViewById(R.id.store_image);
