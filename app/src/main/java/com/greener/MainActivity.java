@@ -2,10 +2,8 @@ package com.greener;
 
 import androidx.annotation.NonNull;
 
-import android.content.Context;
 import android.content.Intent;
 
-import android.app.Activity;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -19,9 +17,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.Manifest;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -45,7 +40,6 @@ import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,9 +51,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private NaverMap mNaverMap;
     private FusedLocationSource mLocationSource;
     private InfoWindow mInfoWindow;
-
-    private ArrayList<StoreList> arrayList = new ArrayList<>();
-    private DatabaseReference databaseReference;
 
     private BottomNavigationView bottomNavigationView;
     private FragmentManager manager;
@@ -80,11 +71,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
 
         //네이버 지도
         mapView = (MapView) findViewById(R.id.map_view);
@@ -93,55 +82,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // 위치를 반환하는 구현체인 FusedLocationSource 생성
         mLocationSource = new FusedLocationSource(this, 100);
-
-        databaseReference = MainActivity.database.getReference("호텔");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
-                    StoreList HotelList = snapshot.getValue(StoreList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
-                    arrayList.add(HotelList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
-                    // System.out.println(HotelList.getNameStr());
-                    // System.out.println(HotelList.getAddressStr());
-
-
-                    Location location = addrToPoint(HotelList.getAddressStr());
-
-                    Marker marker = new Marker(); // 마커 생성
-                    marker.setPosition(new LatLng(location.getLatitude(), location.getLongitude())); // 마커 위치 찍기
-                    marker.setMap(mNaverMap); // 마커 지도에 넣기
-
-                    // 커스텀 마커
-                    marker.setWidth(100);
-                    marker.setHeight(100);
-                    marker.setIcon(OverlayImage.fromResource(R.drawable.ic_place_marker)); // 마커 이미지 넣기
-                    marker.setOnClickListener(new Overlay.OnClickListener(){
-
-                        @Override
-                        public boolean onClick(@NonNull Overlay overlay) {
-                            mInfoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(getApplication())
-                            {
-                                @NonNull
-                                @Override
-                                public CharSequence getText(@NonNull InfoWindow infoWindow)
-                                {
-                                    return HotelList.getNameStr();
-                                }
-                            });
-                            mInfoWindow.open(marker);
-                            return false;
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 디비를 가져오던중 에러 발생 시
-                Log.e("TestActivity", String.valueOf(databaseError.toException())); // 에러문 출력
-            }
-        });
 
 
         //Toolbar 추가하기
@@ -189,26 +129,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         setFragment(fragNum);
 
-    }
-
-    private Location addrToPoint(String str) {
-        Location location = new Location("");
-        Geocoder geocoder = null;
-        List<Address> addrList = null;
-
-        try {
-            addrList = geocoder.getFromLocationName(str, 10);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        if(addrList != null){
-            for(int i = 0; i < addrList.size(); i++){
-                Address latlng = addrList.get(i);
-                location.setLatitude(latlng.getLatitude());
-                location.setLongitude(latlng.getLongitude());
-            }
-        }
-        return location;
     }
 
     @Override
