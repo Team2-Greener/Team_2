@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Greener">
         <activity
+            android:name=".StoreDetailView"
+            android:exported="false" />
+        <activity
             android:name=".SearchMain"
             android:exported="true" />
         <activity

@@ -1,6 +1,7 @@
 package com.greener;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,21 @@ public class MediaViewAdapter extends RecyclerView.Adapter<MediaViewAdapter.View
 
             this.media_image = itemView.findViewById(R.id.media_image);
             this.media_title = itemView.findViewById(R.id.media_title);
+
+            itemView.setClickable(true);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+
+                    Intent intent = new Intent(context, StoreDetailView.class);
+                    intent.putExtra("Path", arrayList.get(position).getImageTitle());
+                    intent.putExtra("Title", arrayList.get(position).getTitleStr());
+
+                    context.startActivity(intent);
+
+                }
+            });
         }
 
     }

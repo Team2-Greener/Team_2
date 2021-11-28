@@ -56,4 +56,5 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.' //툴바
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"   //viewpager2
 }

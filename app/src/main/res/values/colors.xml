@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="main_color">#C2DABC</color>
-    <color name="dark_greenr">#464A38</color>
+    <color name="main_color">#FFC2DABC</color>
+    <color name="dark_greener">#FF464A38</color>
+    <color name="dark_green_gray">#575953</color>
+    <color name="gray_greener">#FFBEC6BC</color>
+    <color name="dark_green">#FF3C7F44</color>
+    <color name="real_green">#FF85C031</color>
+    <color name="light_green">#FFC2DE8A</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

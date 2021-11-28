@@ -1,6 +1,8 @@
 package com.greener;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.View
 
     private ArrayList<StoreList> arrayList;
     private Context context;
+    private int doubleClickFlag = 0;
+    private final long  CLICK_DELAY = 250;
 
     public StoreViewAdapter(ArrayList<StoreList> arrayList, Context context) {
         this.arrayList = arrayList;
@@ -61,8 +65,38 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.View
             this.store_image = itemView.findViewById(R.id.store_image);
             this.store_name = itemView.findViewById(R.id.store_name);
             this.store_address = itemView.findViewById(R.id.store_address);
+
+            itemView.setClickable(true);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    doubleClickFlag++;
+                    Handler handler = new Handler();
+                    Runnable clickRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            doubleClickFlag = 0;
+                            Intent intent = new Intent(context, StoreDetailView.class);
+                            intent.putExtra("Name", arrayList.get(position).getNameStr());
+                            intent.putExtra("TelNum", arrayList.get(position).getCallStr());
+                            intent.putExtra("Address", arrayList.get(position).getAddressStr());
+
+                            context.startActivity(intent);
+                            // todo 클릭 이벤트
+                        }
+                    };
+                    if (doubleClickFlag == 1) {
+                        handler.postDelayed(clickRunnable, CLICK_DELAY);
+                    }
+                    else if (doubleClickFlag == 2) {
+                        doubleClickFlag = 0;
+                        System.out.println("더블클릭");
+                        // todo 즐겨찾기 추가
+                    }
+                }
+            });
+
         }
-
     }
-
 }
