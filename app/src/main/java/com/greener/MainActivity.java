@@ -44,7 +44,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    // implements OnMapReadyCallback, Overlay.OnClickListener
     public static FirebaseDatabase database;
 
     private BottomNavigationView bottomNavigationView;

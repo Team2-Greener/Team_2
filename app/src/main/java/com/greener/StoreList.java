@@ -41,4 +41,5 @@ public class StoreList {
     public void setCallStr(String callStr) {
         this.callStr = callStr;
     }
+
 }
