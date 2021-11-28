@@ -46,7 +46,9 @@ public class ShopMain extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
 
-        databaseReference = MainActivity.database.getReference("샵"); // DB 테이블 연결
+        database = FirebaseDatabase.getInstance();
+
+        databaseReference = database.getReference("샵"); // DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

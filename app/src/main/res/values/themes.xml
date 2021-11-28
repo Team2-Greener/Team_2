@@ -17,6 +17,8 @@
 
         <!-- Toolbar style. -->
         <item name="toolbarStyle">@style/ToolbarStyle.Dark</item>
+        <item name="toolbarNavigationButtonStyle">@style/ToolbarStyle.Dark</item>
+        <item name="android:actionOverflowButtonStyle">@style/ToolbarStyle.Dark</item>
 
         <!--Customize your theme here. -->
     </style>
@@ -26,5 +28,11 @@
         <item name="titleTextAppearance">@color/dark_greener</item> <!-- Toolbar의 타이틀 텍스트-->
         <item name="subtitleTextAppearance">@color/dark_greener</item> <!-- Toolbar의 서브타이틀 텍스트-->
     </style>
+
+    <style name="AppTheme.OverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/dark_greener</item>
+    </style>
+
+
 
 </resources>

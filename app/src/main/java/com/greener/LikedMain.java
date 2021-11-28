@@ -27,6 +27,7 @@ public class LikedMain extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<StoreList> arrayList;
     private DatabaseReference databaseReference;
+    private FirebaseDatabase database;
 
     private View view;
 
@@ -45,7 +46,9 @@ public class LikedMain extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
 
-        databaseReference = MainActivity.database.getReference("저장"); // DB 테이블 연결
+        database = FirebaseDatabase.getInstance();
+
+        databaseReference = database.getReference("저장"); // DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

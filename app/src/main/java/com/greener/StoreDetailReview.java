@@ -2,7 +2,6 @@ package com.greener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,31 +11,24 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.naver.maps.map.overlay.Marker;
-import com.naver.maps.map.overlay.Overlay;
 
 import java.util.ArrayList;
 
-public class StoreDetailView extends AppCompatActivity implements View.OnClickListener{
+public class StoreDetailReview extends AppCompatActivity implements View.OnClickListener{
 
     private ArrayList<String> arrayList;
-    private ArrayList<StoreList> storeLists;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private RecyclerView.Adapter adapter;
@@ -52,8 +44,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
 
     private Button Back, Review;
 
-    private String Name, Tel, Add;
-    private String Image;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,27 +53,9 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
 
         Button Back = findViewById(R.id.btn_go_back);
         Button Review = findViewById(R.id.store_detail_review);
-        Button Save = findViewById(R.id.btn_to_save);
 
         Back.setOnClickListener(this);
         Review.setOnClickListener(this);
-        Save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Save.isSelected() == true) {
-                    Save.setSelected(false);
-                }
-                else {
-                    Save.setSelected(true);
-
-                    databaseReference = database.getInstance().getReference();
-
-                    StoreList liked = new StoreList(Add, Tel, Image, Name);
-
-                    databaseReference.child("user").child(MainActivity.uid).child("저장").setValue(liked);
-                }
-            }
-        });
 
         TextView StoreDetailName = findViewById(R.id.store_detail_name);
         TextView StoreDetailTelNum = findViewById(R.id.store_detail_telNum);
@@ -96,14 +69,13 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
 
         arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
 
-        Name = StoreDetailName.getText().toString();
-        Tel = StoreDetailTelNum.getText().toString();
-        Add = StoreDetailAddress.getText().toString();
+        path = StoreDetailName.getText().toString();
+        System.out.println(path);
 
         adapter = new StoreDetailAdapter(arrayList, this);
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("호텔상세정보").child(Name);
+        databaseReference = database.getReference("호텔상세정보").child(path);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -113,11 +85,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
                     StoreDetailList detailList = snapshot.getValue(StoreDetailList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
 
                     String imageUrl = detailList.getImageUri();
-                    int num = detailList.getNum();
 
-                    if(num == 1) {
-                       Image = imageUrl;
-                    }
                     arrayList.add(imageUrl); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
                 }
                 adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
@@ -198,6 +166,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
             intent = new Intent(this, StoreDetailReview.class);
             this.startActivity(intent);
         }
+
     }
 
     private void setFragment(int n){

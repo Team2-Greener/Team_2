@@ -24,6 +24,9 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.MapView;
@@ -37,8 +40,6 @@ import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, Overlay.OnClickListener {
-
-    public static FirebaseDatabase database;
 
     private MapView mapView;
     private NaverMap mNaverMap;
@@ -59,7 +60,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LikedMap liked_map;
 
     private MenuItem search_menu;
-    private int fragNum = 0;
+    public static int fragNum;
+
+    public static String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,8 +70,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //현재 유저의 uid 받아오기
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
+        }
 
-        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
+        fragNum = 0;
 
         //네이버 지도
         mapView = (MapView) findViewById(R.id.map_view);
