@@ -5,7 +5,6 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,6 +41,8 @@ import java.util.concurrent.Executors;
 public class HotelMap extends Fragment implements OnMapReadyCallback {
     private MapView mapView;
     private ArrayList<StoreList> arrayList = new ArrayList<>();
+    private List<Address> addrList = null;
+    private String addrstr;
     private DatabaseReference databaseReference;
     private NaverMap naverMap;
     private FusedLocationSource mLocationSource;
@@ -88,16 +89,16 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
                         arrayList.add(HotelList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
                         System.out.println("name : "+HotelList.getNameStr()+", addr : "+HotelList.getAddressStr());
 
-                        LatLng latlng = null;
+                        addrList = null;
                         String straddr = HotelList.getNameStr();
-                        List<Address> addrList = null;
+                        LatLng latlng = null;
+
                         try {
-                            addrList = geocoder.getFromLocationName(straddr, 1);
+                            addrList = geocoder.getFromLocationName(straddr, 10);
                             while(addrList.size() == 0) {
                                 addrList = geocoder.getFromLocationName(straddr, 1);
                             }
                             if(addrList.size() > 0) {
-                                System.out.println(addrList.get(0));
                                 Address addr = addrList.get(0);
                                 latlng = new LatLng(addr.getLatitude(), addr.getLongitude());
                                 System.out.println("lat : "+addr.getLatitude()+", lng : "+ addr.getLongitude());
@@ -114,6 +115,8 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
                         marker.setIcon(image); // 마커 이미지 넣기
                         marker.setCaptionText(HotelList.getNameStr());
 
+
+                        /*
                         marker.setOnClickListener(new Overlay.OnClickListener(){
 
                             @Override
@@ -131,6 +134,8 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
                                 return false;
                             }
                         });
+
+                         */
                     }
                 }
 
