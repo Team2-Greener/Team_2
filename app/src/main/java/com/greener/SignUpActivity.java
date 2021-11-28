@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -94,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             FirebaseUser user =  firebaseAuth.getCurrentUser();
                             startToast("회원가입 성공");
-                            myStartActivity(SignUpAcceptActivity.class);
+
                             myStartActivity(LoginActivity.class);
                             finish();
                         }

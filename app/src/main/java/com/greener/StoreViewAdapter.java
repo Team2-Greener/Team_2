@@ -6,6 +6,9 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -20,8 +25,6 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.View
 
     private ArrayList<StoreList> arrayList;
     private Context context;
-    private int doubleClickFlag = 0;
-    private final long  CLICK_DELAY = 250;
 
     public StoreViewAdapter(ArrayList<StoreList> arrayList, Context context) {
         this.arrayList = arrayList;
@@ -46,6 +49,7 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.View
                 .into(holder.store_image);
         holder.store_name.setText(arrayList.get(position).getNameStr());
         holder.store_address.setText(arrayList.get(position).getAddressStr());
+
     }
 
     // 몇개의 데이터를 리스트로 뿌려줘야하는지 반드시 정의해줘야한다
@@ -71,32 +75,16 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.View
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    doubleClickFlag++;
-                    Handler handler = new Handler();
-                    Runnable clickRunnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            doubleClickFlag = 0;
-                            Intent intent = new Intent(context, StoreDetailView.class);
-                            intent.putExtra("Name", arrayList.get(position).getNameStr());
-                            intent.putExtra("TelNum", arrayList.get(position).getCallStr());
-                            intent.putExtra("Address", arrayList.get(position).getAddressStr());
 
-                            context.startActivity(intent);
-                            // todo 클릭 이벤트
-                        }
-                    };
-                    if (doubleClickFlag == 1) {
-                        handler.postDelayed(clickRunnable, CLICK_DELAY);
-                    }
-                    else if (doubleClickFlag == 2) {
-                        doubleClickFlag = 0;
-                        System.out.println("더블클릭");
-                        // todo 즐겨찾기 추가
-                    }
+                    Intent intent = new Intent(context, StoreDetailView.class);
+                    intent.putExtra("Name", arrayList.get(position).getNameStr());
+                    intent.putExtra("TelNum", arrayList.get(position).getCallStr());
+                    intent.putExtra("Address", arrayList.get(position).getAddressStr());
+
+                    context.startActivity(intent);
+
                 }
             });
-
         }
     }
 }

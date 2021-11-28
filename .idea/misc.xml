@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable/btn_notsave.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable/fade_in.xml" value="0.22974358974358974" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable/indicator_active.xml" value="0.1824074074074074" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable/indicator_inactive.xml" value="0.1824074074074074" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable/round_button.xml" value="0.1925925925925926" />
@@ -22,10 +23,10 @@
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/media_main.xml" value="0.12635869565217392" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/shop_detail_view.xml" value="0.22" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/shop_main.xml" value="0.11851851851851852" />
-        <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/store_detail_list.xml" value="0.25" />
+        <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/store_detail_list.xml" value="0.2" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/store_detail_review.xml" value="0.1033434650455927" />
-        <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/store_detail_view.xml" value="0.16" />
-        <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/store_list.xml" value="0.12635869565217392" />
+        <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/store_detail_view.xml" value="0.25" />
+        <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/layout/store_list.xml" value="0.25" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/menu/actionbar.xml" value="0.2046875" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/menu/actionbar_back_action.xml" value="0.22" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/menu/actionbar_back_button.xml" value="0.2171875" />

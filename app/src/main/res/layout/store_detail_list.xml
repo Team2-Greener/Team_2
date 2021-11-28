@@ -17,21 +17,6 @@
         app:cardCornerRadius="30dp"
         app:cardElevation="0dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right" >
-
-            <Button
-                android:id="@+id/store_detail_button"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/gray_greener"/>
-
-        </LinearLayout>
-
         <ImageView
             android:id="@+id/store_detail_image"
             android:layout_width="match_parent"

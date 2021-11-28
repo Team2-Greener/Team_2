@@ -36,9 +36,8 @@ import java.util.ArrayList;
 public class StoreDetailView extends AppCompatActivity implements View.OnClickListener{
 
     private ArrayList<String> arrayList;
-    private ArrayList<StoreList> storeLists;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private FirebaseDatabase database, likedDatabase;
+    private DatabaseReference databaseReference, likedDatabaseReference;
     private RecyclerView.Adapter adapter;
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
@@ -66,20 +65,25 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
 
         Back.setOnClickListener(this);
         Review.setOnClickListener(this);
+
         Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(Save.isSelected() == true) {
                     Save.setSelected(false);
+
+                    likedDatabaseReference = likedDatabase.getInstance().getReference();
+
+                    likedDatabaseReference.child("user").child(MainActivity.uid).child("저장").child(Name).removeValue();
                 }
                 else {
                     Save.setSelected(true);
 
-                    databaseReference = database.getInstance().getReference();
-
                     StoreList liked = new StoreList(Add, Tel, Image, Name);
 
-                    databaseReference.child("user").child(MainActivity.uid).child("저장").setValue(liked);
+                    likedDatabaseReference = likedDatabase.getInstance().getReference();
+
+                    likedDatabaseReference.child("user").child(MainActivity.uid).child("저장").child(Name).setValue(liked);
                 }
             }
         });
@@ -103,7 +107,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         adapter = new StoreDetailAdapter(arrayList, this);
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("호텔상세정보").child(Name);
+        databaseReference = database.getReference("상세정보").child(Name);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
