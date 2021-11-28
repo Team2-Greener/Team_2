@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
+
         //네이버 지도
         mapView = (MapView) findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
