@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.MapView;
@@ -42,6 +43,7 @@ public class ShopMap extends Fragment implements OnMapReadyCallback {
     private NaverMap naverMap;
     private FusedLocationSource mLocationSource;
     private InfoWindow mInfoWindow;
+    private FirebaseDatabase database;
     private OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
 
     private View view;
@@ -65,7 +67,8 @@ public class ShopMap extends Fragment implements OnMapReadyCallback {
 
         mLocationSource = new FusedLocationSource(this, 100);
 
-        databaseReference = MainActivity.database.getReference("샵");
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference(""); // DB 테이블 연결샤
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override

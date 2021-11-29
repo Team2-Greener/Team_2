@@ -26,9 +26,5 @@ public class MediaList {
         this.imageTitle = imageTitle;
     }
 
-    public String getTitleStr() {
-        return titleStr;
-    }
-
     public void setTitleStr(String titleStr) { this.titleStr = titleStr; }
 }

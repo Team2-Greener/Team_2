@@ -27,6 +27,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
@@ -63,6 +64,7 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
     private NaverMap naverMap;
     private FusedLocationSource mLocationSource;
     private InfoWindow mInfoWindow;
+    private FirebaseDatabase database;
     private OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
 
     private View view;
@@ -86,7 +88,8 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
 
         mLocationSource = new FusedLocationSource(this, 100);
 
-        databaseReference = MainActivity.database.getReference("호텔");
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("호텔"); // DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
