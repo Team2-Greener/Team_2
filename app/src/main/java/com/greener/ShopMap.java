@@ -68,7 +68,7 @@ public class ShopMap extends Fragment implements OnMapReadyCallback {
         mLocationSource = new FusedLocationSource(this, 100);
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference(""); // DB 테이블 연결샤
+        databaseReference = database.getReference("샵"); // DB 테이블 연결샤
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
