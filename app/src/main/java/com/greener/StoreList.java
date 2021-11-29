@@ -5,6 +5,8 @@ public class StoreList {
     private String nameStr ;
     private String addressStr ;
     private String callStr;
+    private String x;
+    private String y;
 
     public StoreList() {
 
@@ -41,4 +43,8 @@ public class StoreList {
     public void setCallStr(String callStr) {
         this.callStr = callStr;
     }
+
+    public String getX() { return x; }
+    public String getY() { return y; }
+
 }
