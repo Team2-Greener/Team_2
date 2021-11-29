@@ -43,7 +43,6 @@ public class MediaMain extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.media_recyclerView);
         recyclerView.setHasFixedSize(true);     //리사이클러뷰 성능 강화
-        adapter = new MediaViewAdapter(arrayList, getActivity());
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -70,6 +69,7 @@ public class MediaMain extends Fragment {
             }
         });
 
+        adapter = new MediaViewAdapter(arrayList, getActivity());
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
 
         return view;

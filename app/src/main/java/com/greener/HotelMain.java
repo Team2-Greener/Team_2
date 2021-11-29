@@ -39,7 +39,6 @@ public class HotelMain extends Fragment {
 
         recyclerView = (RecyclerView)view.findViewById(R.id.hotel_recyclerView); // 아디 연결
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 기존성능 강화
-        adapter = new StoreViewAdapter(arrayList, getActivity());
 
         layoutManager = new GridLayoutManager(getContext(),2);//두줄
         recyclerView.setLayoutManager(layoutManager);
@@ -65,6 +64,7 @@ public class HotelMain extends Fragment {
             }
         });
 
+        adapter = new StoreViewAdapter(arrayList, getActivity());
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
 
         return view;
