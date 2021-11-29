@@ -54,7 +54,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.OnClickListener {
+public class HotelMap extends Fragment implements OnMapReadyCallback {
     private MapView mapView;
     private ArrayList<StoreList> arrayList = new ArrayList<>();
     private ArrayList<LatLng> arrayListLatLng = new ArrayList<>();
@@ -63,16 +63,14 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
     private NaverMap naverMap;
     private FusedLocationSource mLocationSource;
     private InfoWindow mInfoWindow;
+    private OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
 
     private View view;
-
-    private OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mLocationSource = new FusedLocationSource(this, 100);
-
     }
 
     @Nullable
@@ -101,7 +99,7 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
                     Double x = Double.parseDouble(HotelList.getX());
                     Double y = Double.parseDouble(HotelList.getY());
                     LatLng ll = new LatLng(x, y);
-                    setmark(HotelList.getNameStr(), HotelList.getAddressStr(), HotelList.getCallStr(), ll);
+                    setmark(HotelList.getNameStr(), ll);
                 }
             }
 
@@ -116,7 +114,7 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
     }
 
 
-    private void setmark(String name, String addr, String calNum, LatLng latlng) {
+    private void setmark(String name, LatLng latlng) {
         Marker marker = new Marker();
         marker.setPosition(latlng); // 마커 위치 찍기
         marker.setWidth(100);
@@ -134,9 +132,12 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
                     @Override
                     public CharSequence getText(@NonNull InfoWindow infoWindow)
                     {
+                        /*
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse("tel:"+calNum));
                         startActivity(intent);
+
+                         */
                         return name;
                     }
                 });
@@ -206,6 +207,7 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
         inflater.inflate(R.menu.actionbar_map_action, menu);
     }
 
+    /*
     @Override
     public boolean onClick(@NonNull Overlay overlay) {
 
@@ -225,4 +227,6 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
 
         return false;
     }
+
+     */
 }
