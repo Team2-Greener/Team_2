@@ -1,38 +1,60 @@
 package com.greener;
 
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class StoreDetailAdapter extends FragmentStateAdapter {
+import com.bumptech.glide.Glide;
 
-    public int Count;
+import java.util.ArrayList;
 
-    public StoreDetailAdapter(FragmentActivity fa, int count) {
-        super(fa);
-        Count = count;
+public class StoreDetailAdapter extends RecyclerView.Adapter<StoreDetailAdapter.ViewHolder> {
+
+    private ArrayList<String> arrayList;
+    private Context context;
+
+    public StoreDetailAdapter(ArrayList<String> arrayList, Context context) {
+        this.arrayList = arrayList;
+        this.context = context;
     }
 
+    // ViewHolder 생성
     @NonNull
     @Override
-    public Fragment createFragment(int position) {
-        int index = getRealPosition(position);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.store_detail_list, parent, false);
+        ViewHolder holder = new ViewHolder(view);
 
-        if(index==0) return new ViewPage1();
-        else if(index==1) return new ViewPage2();
-        else if(index==2) return new ViewPage3();
-        else return new ViewPage4();
+        return holder;
     }
 
+    //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Glide.with(holder.itemView)
+                .load(arrayList.get(position))
+                .into(holder.store_detail_image);
+    }
+
+    // 몇개의 데이터를 리스트로 뿌려줘야하는지 반드시 정의해줘야한다
     @Override
     public int getItemCount() {
-        return 2000;
+        return arrayList.size(); // RecyclerView의 size return
     }
 
-    public int getRealPosition(int position) {
-        return position;
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private ImageView store_detail_image;
 
+        public ViewHolder (@NonNull View itemView) {
+            super(itemView);
+
+            this.store_detail_image = itemView.findViewById(R.id.store_detail_image);
+        }
+    }
 }

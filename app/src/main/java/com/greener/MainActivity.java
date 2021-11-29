@@ -7,6 +7,8 @@ import android.content.Intent;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,8 +29,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
@@ -39,6 +44,8 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -65,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public static String uid;
     public static Context context_main;
+
+    private FirebaseDatabase getDatabase, setDatabase, nameDatabase;
+    private DatabaseReference getReference, setReference, nameReference;
+    private static ArrayList<StoreDetailList> arrayList = new ArrayList<StoreDetailList>();
+    private String Name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

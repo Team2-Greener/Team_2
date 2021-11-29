@@ -86,12 +86,12 @@
                     android:clipChildren="false"
                     android:scaleType="centerCrop" />
 
-                <me.relex.circleindicator.CircleIndicator3
-                    android:id="@+id/indicator"
+                <LinearLayout
+                    android:id="@+id/layoutIndicators"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_gravity="bottom"/>
+                    android:orientation="horizontal"
+                    android:layout_gravity="bottom" />
 
             </FrameLayout>
 

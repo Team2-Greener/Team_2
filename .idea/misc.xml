@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable-v24/main_layout_bottom_bar.xml" value="0.1" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable/btn_notsave.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable/fade_in.xml" value="0.22974358974358974" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable/indicator_active.xml" value="0.1824074074074074" />
@@ -37,6 +38,7 @@
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/menu/actionbar_back_button.xml" value="0.2171875" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/menu/actionbar_list_action.xml" value="0.1" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/menu/actionbar_map_action.xml" value="0.2046875" />
+        <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/menu/menu.xml" value="0.16129032258064516" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/drawable-v24/main_layout_bottom_bar.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/sooo0426/AndroidStudioProjects/OpenSource/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />

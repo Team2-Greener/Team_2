@@ -41,19 +41,18 @@ import me.relex.circleindicator.CircleIndicator3;
 
 public class StoreDetailView extends AppCompatActivity implements View.OnClickListener{
 
+    private ArrayList<String> arrayList;
+    private ArrayList<StoreList> storeLists;
     private FirebaseDatabase database, likedDatabase, saveDatabase, imageDatabase;
     private DatabaseReference databaseReference, likedDatabaseReference, savedatabaseReference, imageReference;
-    private ViewPager2 Pager;
-    private FragmentStateAdapter pagerAdapter;
-    private int page_num = 0;
-    private CircleIndicator3 Indicator;
+    private RecyclerView.Adapter adapter;
+    private ViewPager2 sliderViewPager;
 
     private Button Back, Review;
     private static Button Save;
 
     private String Name, Tel, Add;
-    private String Image;
-    public static String pageImage1, pageImage2, pageImage3, pageImage4;
+    private String Image, path;
     private int num;
 
     @Override
@@ -64,8 +63,6 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         Back = findViewById(R.id.btn_go_back);
         Review = findViewById(R.id.store_detail_review);
         Save = findViewById(R.id.btn_to_save);
-
-        Save.setSelected(false);
 
         Back.setOnClickListener(this);
         Review.setOnClickListener(this);
@@ -79,6 +76,10 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
                     likedDatabaseReference = likedDatabase.getInstance().getReference();
 
                     likedDatabaseReference.child("user").child(MainActivity.uid).child("저장").child(Name).removeValue();
+
+                    savedatabaseReference = saveDatabase.getInstance().getReference();
+                    savedatabaseReference.child(path).child("save").removeValue();
+
                 } else if (Save.isSelected() == false) {
                     Save.setSelected(true);
 
@@ -87,6 +88,9 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
                     likedDatabaseReference = likedDatabase.getInstance().getReference();
 
                     likedDatabaseReference.child("user").child(MainActivity.uid).child("저장").child(Name).setValue(liked);
+
+                    savedatabaseReference = saveDatabase.getInstance().getReference();
+                    savedatabaseReference.child(path).child("save").setValue("true");
                 }
             }
         });
@@ -101,55 +105,55 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         StoreDetailTelNum.setText(intent.getStringExtra("TelNum"));
         StoreDetailAddress.setText(intent.getStringExtra("Address"));
 
+        arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
+
         Name = StoreDetailName.getText().toString();
         Tel = StoreDetailTelNum.getText().toString();
         Add = StoreDetailAddress.getText().toString();
 
-        Pager = findViewById(R.id.store_ViewPager);
+        path = "user/" + MainActivity.uid + "/정보/" + Name;
 
-        pagerAdapter = new StoreDetailAdapter(this, page_num);
-        Pager.setAdapter(pagerAdapter);
-
-        Indicator = findViewById(R.id.indicator);
-        Indicator.setViewPager(Pager);
-        Indicator.createIndicators(page_num, 0);
-
-        Pager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-
-        Pager.setCurrentItem(1000); //시작 지점
-        Pager.setOffscreenPageLimit(4); //최대 이미지 수
-
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("상세정보").child(Name);
-
+        databaseReference = database.getInstance().getReference();
+        databaseReference.child(path).child("save");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
-                    StoreDetailList detailList = snapshot.getValue(StoreDetailList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
+                if(dataSnapshot.exists()) {
+                    Save.setSelected(true);
+                }
+                else {
+                    Save.setSelected(false);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("TestActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
 
-                    String imageUrl = detailList.getImageUri();
+        adapter = new StoreDetailAdapter(arrayList, this);
+
+        imageReference = imageDatabase.getInstance().getReference();
+
+        imageReference.child("상세정보");
+        imageReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
+                    StoreDetailList detailList = snapshot.getValue(StoreDetailList.class);
+
+                    String imageUri = detailList.getImageUri();
                     num = detailList.getNum();
 
                     if (num == 1) {
-                        Image = imageUrl;
-                        pageImage1 = imageUrl;
-                        page_num++;
+                        Image = imageUri;
                     }
-                    else if(num == 2) {
-                        pageImage2 = imageUrl;
-                        page_num++;
-                    }
-                    else if(num == 3) {
-                        pageImage3 = imageUrl;
-                        page_num++;
-                    }
-                    else if(num == 4) {
-                        pageImage4 = imageUrl;
-                        page_num++;
-                    }
+                    arrayList.add(imageUri); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
                 }
+                adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
             }
 
             @Override
@@ -159,40 +163,18 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        String path = "user/" + MainActivity.uid + "/저장";
+        sliderViewPager = findViewById(R.id.store_ViewPager);
 
-        saveDatabase = FirebaseDatabase.getInstance();
-        savedatabaseReference = saveDatabase.getReference();
-        Query query = savedatabaseReference.orderByChild(path).equalTo(Name);
+        sliderViewPager.setOffscreenPageLimit(1);
+        sliderViewPager.setAdapter(adapter);
 
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Save.setSelected(true);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // 디비를 가져오던중 에러 발생 시
-                Log.e("TestActivity", String.valueOf(databaseError.toException())); // 에러문 출력
-            }
-        });
-
-        Pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                if (positionOffsetPixels == 0) {
-                    Pager.setCurrentItem(position);
-                }
-            }
-
+        sliderViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                Indicator.animatePageSelected(position);
             }
         });
+
     }
 
     @Override
