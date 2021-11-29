@@ -5,30 +5,35 @@
         android:id="@+id/shop_menu"
         android:enabled="true"
         android:icon="@drawable/tab_shop"
-        android:title="shop" />
+        android:title="shop"
+        android:iconTint="@color/dark_greener"/>
 
     <item
         android:id="@+id/hotel_menu"
         android:enabled="true"
         android:icon="@drawable/tab_hotel"
-        android:title="hotel"></item>
+        android:title="hotel"
+        android:iconTint="@color/dark_greener"/>
 
     <item
         android:id="@+id/liked_menu"
         android:enabled="true"
         android:icon="@drawable/tab_liked"
-        android:title="liked"></item>
+        android:title="liked"
+        android:iconTint="@color/dark_greener"/>
 
     <item
         android:id="@+id/media_menu"
         android:enabled="true"
         android:icon="@drawable/tab_media"
-        android:title="media"></item>
+        android:title="media"
+        android:iconTint="@color/dark_greener"/>
 
     <item
         android:id="@+id/setting_menu"
         android:enabled="true"
         android:icon="@drawable/tab_setting"
-        android:title="setting"></item>
+        android:title="setting"
+        android:iconTint="@color/dark_greener"/>
 
 </menu>

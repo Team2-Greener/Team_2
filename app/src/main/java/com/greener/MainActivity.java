@@ -2,6 +2,7 @@ package com.greener;
 
 import androidx.annotation.NonNull;
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.location.Address;
@@ -26,6 +27,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -60,7 +64,10 @@ public class MainActivity extends AppCompatActivity {
     private LikedMap liked_map;
 
     private MenuItem search_menu;
-    private int fragNum = 0;
+    public static int fragNum;
+
+    public static String uid;
+    public static Context context_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,8 +76,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
+        //현재 유저의 uid 받아오기
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
+        }
 
+        context_main = this;
+
+        fragNum = 0;
         //Toolbar 추가하기
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -233,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
      */
 
     //Fragment 이동
-    private void setFragment(int n){
+    public void setFragment(int n){
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
         switch(n){

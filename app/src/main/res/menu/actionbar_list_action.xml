@@ -8,7 +8,7 @@
         android:enabled="true"
         android:icon="@drawable/search"
         android:title="search"
-        app:showAsAction="ifRoom"
+        app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.widget.SearchView"/>
 
     <item

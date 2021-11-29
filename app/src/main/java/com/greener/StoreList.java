@@ -12,6 +12,13 @@ public class StoreList {
 
     }
 
+    public StoreList(String addressStr, String callStr, String imageUri, String nameStr) {
+        this.addressStr = addressStr;
+        this.callStr = callStr;
+        this.imageUri = imageUri;
+        this.nameStr = nameStr;
+    }
+
     public String getImageUri() {
         return imageUri;
     }

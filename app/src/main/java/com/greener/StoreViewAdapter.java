@@ -1,11 +1,16 @@
 package com.greener;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -45,6 +52,7 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.Stor
                 .into(holder.store_image);
         holder.store_name.setText(arrayList.get(position).getNameStr());
         holder.store_address.setText(arrayList.get(position).getAddressStr());
+
     }
 
     // 몇개의 데이터를 리스트로 뿌려줘야하는지 반드시 정의해줘야한다
@@ -64,8 +72,22 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.Stor
             this.store_image = itemView.findViewById(R.id.store_image);
             this.store_name = itemView.findViewById(R.id.store_name);
             this.store_address = itemView.findViewById(R.id.store_address);
+
+            itemView.setClickable(true);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+
+                    Intent intent = new Intent(context, StoreDetailView.class);
+                    intent.putExtra("Name", arrayList.get(position).getNameStr());
+                    intent.putExtra("TelNum", arrayList.get(position).getCallStr());
+                    intent.putExtra("Address", arrayList.get(position).getAddressStr());
+
+                    context.startActivity(intent);
+
+                }
+            });
         }
-
     }
-
 }
