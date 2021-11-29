@@ -62,7 +62,7 @@ public class ShopMain extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // 디비를 가져오던중 에러 발생 시
-                Log.e("TestActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+                Log.e("ShopMain", String.valueOf(databaseError.toException())); // 에러문 출력
             }
         });
 

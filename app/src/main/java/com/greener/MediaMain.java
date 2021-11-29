@@ -42,13 +42,14 @@ public class MediaMain extends Fragment {
         view = inflater.inflate(R.layout.media_main, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.media_recyclerView);
+        recyclerView.setHasFixedSize(true);     //리사이클러뷰 성능 강화
         adapter = new MediaViewAdapter(arrayList, getActivity());
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
 
-        databaseReference = MainActivity.database.getReference("컨텐츠"); // DB 테이블 연결
+        databaseReference = MainActivity.database.getReference("환경정보메인"); // DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -56,6 +57,7 @@ public class MediaMain extends Fragment {
                 arrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
                     MediaList ContentList = snapshot.getValue(MediaList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
+
                     arrayList.add(ContentList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
                 }
                 adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
@@ -64,7 +66,7 @@ public class MediaMain extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // 디비를 가져오던중 에러 발생 시
-                Log.e("TestActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+                Log.e("MediaMain", String.valueOf(databaseError.toException())); // 에러문 출력
             }
         });
 
