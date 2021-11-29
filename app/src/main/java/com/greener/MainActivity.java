@@ -2,6 +2,7 @@ package com.greener;
 
 import androidx.annotation.NonNull;
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.app.Activity;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static int fragNum;
 
     public static String uid;
+    public static Context context_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (user != null) {
             uid = user.getUid();
         }
+
+        context_main = this;
 
         fragNum = 0;
 
@@ -291,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     //Fragment 이동
-    private void setFragment(int n){
+    public void setFragment(int n){
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
         switch(n){

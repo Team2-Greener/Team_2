@@ -1,12 +1,14 @@
 package com.greener;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -23,45 +25,47 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 
 import java.util.ArrayList;
 
+import me.relex.circleindicator.CircleIndicator3;
+
 public class StoreDetailView extends AppCompatActivity implements View.OnClickListener{
 
-    private ArrayList<String> arrayList;
-    private FirebaseDatabase database, likedDatabase;
-    private DatabaseReference databaseReference, likedDatabaseReference;
-    private RecyclerView.Adapter adapter;
-    private ViewPager2 sliderViewPager;
-    private LinearLayout layoutIndicator;
-
-    private FragmentManager manager;
-    private FragmentTransaction transaction;
-
-    private ShopMain shop_main;
-    private HotelMain hotel_main;
-    private LikedMain liked_main;
+    private FirebaseDatabase database, likedDatabase, saveDatabase, imageDatabase;
+    private DatabaseReference databaseReference, likedDatabaseReference, savedatabaseReference, imageReference;
+    private ViewPager2 Pager;
+    private FragmentStateAdapter pagerAdapter;
+    private int page_num = 0;
+    private CircleIndicator3 Indicator;
 
     private Button Back, Review;
+    private static Button Save;
 
     private String Name, Tel, Add;
     private String Image;
+    public static String pageImage1, pageImage2, pageImage3, pageImage4;
+    private int num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.store_detail_view);
 
-        Button Back = findViewById(R.id.btn_go_back);
-        Button Review = findViewById(R.id.store_detail_review);
-        Button Save = findViewById(R.id.btn_to_save);
+        Back = findViewById(R.id.btn_go_back);
+        Review = findViewById(R.id.store_detail_review);
+        Save = findViewById(R.id.btn_to_save);
+
+        Save.setSelected(false);
 
         Back.setOnClickListener(this);
         Review.setOnClickListener(this);
@@ -69,14 +73,13 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Save.isSelected() == true) {
+                if (Save.isSelected() == true) {
                     Save.setSelected(false);
 
                     likedDatabaseReference = likedDatabase.getInstance().getReference();
 
                     likedDatabaseReference.child("user").child(MainActivity.uid).child("저장").child(Name).removeValue();
-                }
-                else {
+                } else if (Save.isSelected() == false) {
                     Save.setSelected(true);
 
                     StoreList liked = new StoreList(Add, Tel, Image, Name);
@@ -98,33 +101,55 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         StoreDetailTelNum.setText(intent.getStringExtra("TelNum"));
         StoreDetailAddress.setText(intent.getStringExtra("Address"));
 
-        arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
-
         Name = StoreDetailName.getText().toString();
         Tel = StoreDetailTelNum.getText().toString();
         Add = StoreDetailAddress.getText().toString();
 
-        adapter = new StoreDetailAdapter(arrayList, this);
+        Pager = findViewById(R.id.store_ViewPager);
+
+        pagerAdapter = new StoreDetailAdapter(this, page_num);
+        Pager.setAdapter(pagerAdapter);
+
+        Indicator = findViewById(R.id.indicator);
+        Indicator.setViewPager(Pager);
+        Indicator.createIndicators(page_num, 0);
+
+        Pager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+
+        Pager.setCurrentItem(1000); //시작 지점
+        Pager.setOffscreenPageLimit(4); //최대 이미지 수
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("상세정보").child(Name);
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                arrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
                     StoreDetailList detailList = snapshot.getValue(StoreDetailList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
 
                     String imageUrl = detailList.getImageUri();
-                    int num = detailList.getNum();
+                    num = detailList.getNum();
 
-                    if(num == 1) {
-                       Image = imageUrl;
+                    if (num == 1) {
+                        Image = imageUrl;
+                        pageImage1 = imageUrl;
+                        page_num++;
                     }
-                    arrayList.add(imageUrl); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
+                    else if(num == 2) {
+                        pageImage2 = imageUrl;
+                        page_num++;
+                    }
+                    else if(num == 3) {
+                        pageImage3 = imageUrl;
+                        page_num++;
+                    }
+                    else if(num == 4) {
+                        pageImage4 = imageUrl;
+                        page_num++;
+                    }
                 }
-                adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
             }
 
             @Override
@@ -134,60 +159,40 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        sliderViewPager = findViewById(R.id.store_ViewPager);
-        layoutIndicator = findViewById(R.id.layoutIndicators);
+        String path = "user/" + MainActivity.uid + "/저장";
 
-        sliderViewPager.setOffscreenPageLimit(1);
-        sliderViewPager.setAdapter(adapter);
+        saveDatabase = FirebaseDatabase.getInstance();
+        savedatabaseReference = saveDatabase.getReference();
+        Query query = savedatabaseReference.orderByChild(path).equalTo(Name);
 
-        sliderViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                setCurrentIndicator(position);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Save.setSelected(true);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("TestActivity", String.valueOf(databaseError.toException())); // 에러문 출력
             }
         });
 
-        setupIndicators(arrayList.size());
-
-        shop_main = new ShopMain();
-        hotel_main = new HotelMain();
-        liked_main = new LikedMain();
-    }
-
-    private void setupIndicators(int count) {
-        ImageView[] indicators = new ImageView[count];
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        params.setMargins(16, 8, 16, 8);
-
-        for (int i = 0; i < indicators.length; i++) {
-            indicators[i] = new ImageView(this);
-            indicators[i].setImageDrawable(ContextCompat.getDrawable(this,
-                    R.drawable.indicator_inactive));
-            indicators[i].setLayoutParams(params);
-            layoutIndicator.addView(indicators[i]);
-        }
-        setCurrentIndicator(0);
-    }
-
-    private void setCurrentIndicator(int position) {
-        int childCount = layoutIndicator.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            ImageView imageView = (ImageView) layoutIndicator.getChildAt(i);
-            if (i == position) {
-                imageView.setImageDrawable(ContextCompat.getDrawable(
-                        this,
-                        R.drawable.indicator_active
-                ));
-            } else {
-                imageView.setImageDrawable(ContextCompat.getDrawable(
-                        this,
-                        R.drawable.indicator_inactive
-                ));
+        Pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if (positionOffsetPixels == 0) {
+                    Pager.setCurrentItem(position);
+                }
             }
-        }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                Indicator.animatePageSelected(position);
+            }
+        });
     }
 
     @Override
@@ -196,31 +201,16 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         int id = view.getId();
 
         if(id == R.id.btn_go_back) {
-            setFragment(MainActivity.fragNum);
+            int fragnum = MainActivity.fragNum;
+
+            ((MainActivity)MainActivity.context_main).setFragment(fragnum);
+            finish();
         }
         else if(id == R.id.store_detail_review) {
             intent = new Intent(this, StoreDetailReview.class);
             this.startActivity(intent);
-        }
-    }
 
-    private void setFragment(int n){
-        manager = getSupportFragmentManager();
-        transaction = manager.beginTransaction();
-
-        switch(n){
-            case 0:
-                transaction.replace(R.id.store_detail_scroll, shop_main);    //shop_main으로 이동
-                transaction.commit();   //상태 save
-                break;
-            case 1:
-                transaction.replace(R.id.main_frame, hotel_main);   //hotel_main으로 이동
-                transaction.commit();
-                break;
-            case 2:
-                transaction.replace(R.id.main_frame, liked_main);   //liked_main으로 이동
-                transaction.commit();
-                break;
+            finish();
         }
     }
 }
