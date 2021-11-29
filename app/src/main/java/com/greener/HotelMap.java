@@ -1,7 +1,10 @@
 package com.greener;
 
+import android.content.Intent;
+import android.icu.text.IDNA;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,7 +41,14 @@ import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -54,6 +65,8 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
     private InfoWindow mInfoWindow;
 
     private View view;
+
+    private OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -73,7 +86,7 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        Geocoder geocoder = new Geocoder(getContext());
+        mLocationSource = new FusedLocationSource(this, 100);
 
         databaseReference = MainActivity.database.getReference("호텔");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -85,37 +98,10 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
                     StoreList HotelList = snapshot.getValue(StoreList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
                     arrayList.add(HotelList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
 
-                    Executor executor = Executors.newFixedThreadPool(100);
-                    Handler handler = new Handler(Looper.getMainLooper());
-
-                    executor.execute(() -> {
-                        for(int i = 0; i < arrayList.size(); i++){
-                            addrList = null;
-                            String straddr = arrayList.get(i).getAddressStr();
-                            LatLng latlng = null;
-
-                            try {
-                                addrList = geocoder.getFromLocationName(straddr, 10);
-                                while(addrList.size() == 0) {
-                                    addrList = geocoder.getFromLocationName(straddr, 1);
-                                }
-                                if(addrList.size() > 0) {
-                                    Address addr = addrList.get(0);
-                                    latlng = new LatLng(addr.getLatitude(), addr.getLongitude());
-                                    arrayListLatLng.add(latlng);
-                                }
-                            } catch (Exception e) {
-                                System.out.print(e.getMessage());
-                            }
-
-                        }
-                        handler.post(() -> {
-                            for(LatLng ll : arrayListLatLng){
-                                setmark(ll); // 마커 지도에 넣기
-                            }
-                            // setmark3();
-                        });
-                    });
+                    Double x = Double.parseDouble(HotelList.getX());
+                    Double y = Double.parseDouble(HotelList.getY());
+                    LatLng ll = new LatLng(x, y);
+                    setmark(HotelList.getNameStr(), HotelList.getAddressStr(), HotelList.getCallStr(), ll);
                 }
             }
 
@@ -128,14 +114,16 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
 
         return view;
     }
-    OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
-    private void setmark(LatLng latlng) {
+
+
+    private void setmark(String name, String addr, String calNum, LatLng latlng) {
         Marker marker = new Marker();
         marker.setPosition(latlng); // 마커 위치 찍기
         marker.setWidth(100);
         marker.setHeight(100);
         marker.setIcon(image); // 마커 이미지 넣기
-        // marker.setCaptionText(name);
+        marker.setCaptionText(name);
+
 
         marker.setOnClickListener(new Overlay.OnClickListener(){
             @Override
@@ -146,101 +134,56 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
                     @Override
                     public CharSequence getText(@NonNull InfoWindow infoWindow)
                     {
-                        return "name";
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse("tel:"+calNum));
+                        startActivity(intent);
+                        return name;
                     }
                 });
                 mInfoWindow.open(marker);
                 return false;
             }
         });
-        marker.setMap(naverMap);
-    }
 
-    private void setmark2(){
-        OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
-        Executor executor = Executors.newFixedThreadPool(100);
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        executor.execute(() -> {
-            List<Marker> markers = new ArrayList<>();
-
-            /*
-            for(int i = 0; i < 1000; ++i){
-                Marker marker = new Marker();
-                marker.setPosition(new LatLng(37.5670135 + 0.0001 * i, 126.9783740 + 0.0001 * i));
-                markers.add(marker);
-            }
-
-             */
-            for(int i = 0; i < arrayList.size(); i++){
-                Marker marker = new Marker();
-                marker.setPosition(arrayListLatLng.get(i)); // 마커 위치 찍기
-                marker.setWidth(100);
-                marker.setHeight(100);
-                marker.setIcon(image); // 마커 이미지 넣기
-                String name = arrayList.get(i).getNameStr();
-                marker.setCaptionText(name);
-
-                marker.setOnClickListener(new Overlay.OnClickListener(){
-                    @Override
-                    public boolean onClick(@NonNull Overlay overlay) {
-                        mInfoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(getContext())
-                        {
-                            @NonNull
-                            @Override
-                            public CharSequence getText(@NonNull InfoWindow infoWindow)
-                            {
-                                return name;
-                            }
-                        });
-                        mInfoWindow.open(marker);
-                        return false;
-                    }
-                });
-
-                markers.add(marker);
-            }
-
-            handler.post(() -> {
-                for(Marker marker : markers){
-                    marker.setMap(naverMap); // 마커 지도에 넣기
+        /*
+        marker.setOnClickListener(overlay -> {
+            mInfoWindow.setAdapter(new InfoWindow.DefaultViewAdapter(getContext()) {
+                @NonNull
+                @Override
+                protected View getContentView(@NonNull InfoWindow infoWindow) {
+                    Marker marker1 = infoWindow.getMarker();
+                    PlaceInfo info = (PlaceInfo) marker1.getTag();
+                    View view = View.inflate(getContext(), R.layout.view_info_window, null);
+                    ((TextView) view.findViewById(R.id.txttitle)).setText(name);
+                    ((TextView) view.findViewById(R.id.txtaddr)).setText(addr);
+                    ((TextView) view.findViewById(R.id.txttel)).setText(calNum);
+                    return view;
                 }
             });
+            return false;
         });
-    }
-    private void setmark3(){
-        OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
 
 
-            for(int i = 0; i < arrayList.size(); i++){
-                Marker marker = new Marker();
-                marker.setPosition(arrayListLatLng.get(i)); // 마커 위치 찍기
-                System.out.println("lat : "+ arrayListLatLng.get(i).latitude+", lon : "+arrayListLatLng.get(i).longitude);
-                marker.setWidth(100);
-                marker.setHeight(100);
-                marker.setIcon(image); // 마커 이미지 넣기
-                String name = arrayList.get(i).getNameStr();
-                marker.setCaptionText(name);
-
-                marker.setOnClickListener(new Overlay.OnClickListener(){
+        marker.setOnClickListener(new Overlay.OnClickListener() {
+            @Override
+            public boolean onClick(@NonNull Overlay overlay) {
+                mInfoWindow.setAdapter(new InfoWindow.ViewAdapter() {
+                    @NonNull
                     @Override
-                    public boolean onClick(@NonNull Overlay overlay) {
-                        mInfoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(getContext())
-                        {
-                            @NonNull
-                            @Override
-                            public CharSequence getText(@NonNull InfoWindow infoWindow)
-                            {
-                                return name;
-                            }
-                        });
-                        mInfoWindow.open(marker);
-                        return false;
+                    public View getView(@NonNull InfoWindow infoWindow) {
+                        View view = View.inflate(getContext(), R.layout.view_info_window, null);
+                        ((TextView) view.findViewById(R.id.txttitle)).setText(name);
+                        ((TextView) view.findViewById(R.id.txtaddr)).setText(addr);
+                        ((TextView) view.findViewById(R.id.txttel)).setText(calNum);
+                        return view;
                     }
                 });
-                marker.setMap(naverMap);
+                return false;
             }
+        });
 
+         */
+        marker.setMap(naverMap);
     }
 
     public void onMapReady(@NonNull NaverMap naverMap) {
@@ -252,63 +195,8 @@ public class HotelMap extends Fragment implements OnMapReadyCallback, Overlay.On
         uiSettings.setCompassEnabled(false); // 기본값 : true
         uiSettings.setLocationButtonEnabled(true); // 기본값 : false
 
-
         mInfoWindow = new InfoWindow();
-        OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
         arrayList = new ArrayList<>();
-
-        Executor executor = Executors.newFixedThreadPool(100);
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        /*
-        executor.execute(() -> {
-            List<Marker> markers = new ArrayList<>();
-
-
-            for(int i = 0; i < 1000; ++i){
-                Marker marker = new Marker();
-                marker.setPosition(new LatLng(37.5670135 + 0.0001 * i, 126.9783740 + 0.0001 * i));
-                markers.add(marker);
-            }
-
-
-            for(int i = 0; i < arrayList.size(); i++){
-                Marker marker = new Marker();
-                marker.setPosition(arrayListLatLng.get(i)); // 마커 위치 찍기
-                marker.setWidth(100);
-                marker.setHeight(100);
-                marker.setIcon(image); // 마커 이미지 넣기
-                String name = arrayList.get(i).getNameStr();
-                marker.setCaptionText(name);
-
-                marker.setOnClickListener(new Overlay.OnClickListener(){
-                    @Override
-                    public boolean onClick(@NonNull Overlay overlay) {
-                        mInfoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(getContext())
-                        {
-                            @NonNull
-                            @Override
-                            public CharSequence getText(@NonNull InfoWindow infoWindow)
-                            {
-                                return name;
-                            }
-                        });
-                        mInfoWindow.open(marker);
-                        return false;
-                    }
-                });
-
-                markers.add(marker);
-            }
-
-            handler.post(() -> {
-                for(Marker marker : markers){
-                    marker.setMap(naverMap); // 마커 지도에 넣기
-                }
-            });
-        });
-
-         */
     }
 
     @Override
