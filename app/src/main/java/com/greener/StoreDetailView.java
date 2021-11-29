@@ -36,32 +36,26 @@ import java.util.ArrayList;
 public class StoreDetailView extends AppCompatActivity implements View.OnClickListener{
 
     private ArrayList<String> arrayList;
-    private FirebaseDatabase database, likedDatabase;
-    private DatabaseReference databaseReference, likedDatabaseReference;
+    private FirebaseDatabase database, likedDatabase, saveDatabase;
+    private DatabaseReference databaseReference, likedReference, saveReference;
     private RecyclerView.Adapter adapter;
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
 
-    private FragmentManager manager;
-    private FragmentTransaction transaction;
-
-    private ShopMain shop_main;
-    private HotelMain hotel_main;
-    private LikedMain liked_main;
-
     private Button Back, Review;
+    private static Button Save;
 
     private String Name, Tel, Add;
-    private String Image;
+    private String Image, path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.store_detail_view);
 
-        Button Back = findViewById(R.id.btn_go_back);
-        Button Review = findViewById(R.id.store_detail_review);
-        Button Save = findViewById(R.id.btn_to_save);
+        Back = findViewById(R.id.btn_go_back);
+        Review = findViewById(R.id.store_detail_review);
+        Save = findViewById(R.id.btn_to_save);
 
         Back.setOnClickListener(this);
         Review.setOnClickListener(this);
@@ -72,18 +66,18 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
                 if(Save.isSelected() == true) {
                     Save.setSelected(false);
 
-                    likedDatabaseReference = likedDatabase.getInstance().getReference();
+                    likedReference = likedDatabase.getInstance().getReference();
 
-                    likedDatabaseReference.child("user").child(MainActivity.uid).child("저장").child(Name).removeValue();
+                    likedReference.child(path).removeValue();
                 }
-                else {
+                else if(Save.isSelected() == false){
                     Save.setSelected(true);
 
                     StoreList liked = new StoreList(Add, Tel, Image, Name);
 
-                    likedDatabaseReference = likedDatabase.getInstance().getReference();
+                    likedReference = likedDatabase.getInstance().getReference();
 
-                    likedDatabaseReference.child("user").child(MainActivity.uid).child("저장").child(Name).setValue(liked);
+                    likedReference.child(path).setValue(liked);
                 }
             }
         });
@@ -134,6 +128,27 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
             }
         });
 
+        path = "user/" + MainActivity.uid + "/저장/" + Name;
+
+        databaseReference = database.getInstance().getReference().child(path);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                if(dataSnapshot.exists()) {
+                    Save.setSelected(true);
+                }
+                else {
+                    Save.setSelected(false);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("TestActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
+
         sliderViewPager = findViewById(R.id.store_ViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
 
@@ -149,10 +164,6 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         });
 
         setupIndicators(arrayList.size());
-
-        shop_main = new ShopMain();
-        hotel_main = new HotelMain();
-        liked_main = new LikedMain();
     }
 
     private void setupIndicators(int count) {
@@ -189,38 +200,22 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
             }
         }
     }
-
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
         int id = view.getId();
 
         if(id == R.id.btn_go_back) {
-            setFragment(MainActivity.fragNum);
+            int fragnum = MainActivity.fragNum;
+
+            ((MainActivity)MainActivity.context_main).setFragment(fragnum);
+            finish();
         }
         else if(id == R.id.store_detail_review) {
             intent = new Intent(this, StoreDetailReview.class);
             this.startActivity(intent);
-        }
-    }
 
-    private void setFragment(int n){
-        manager = getSupportFragmentManager();
-        transaction = manager.beginTransaction();
-
-        switch(n){
-            case 0:
-                transaction.replace(R.id.store_detail_scroll, shop_main);    //shop_main으로 이동
-                transaction.commit();   //상태 save
-                break;
-            case 1:
-                transaction.replace(R.id.main_frame, hotel_main);   //hotel_main으로 이동
-                transaction.commit();
-                break;
-            case 2:
-                transaction.replace(R.id.main_frame, liked_main);   //liked_main으로 이동
-                transaction.commit();
-                break;
+            finish();
         }
     }
 }
