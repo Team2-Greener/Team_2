@@ -75,7 +75,6 @@ public class MediaViewAdapter extends RecyclerView.Adapter<MediaViewAdapter.Medi
                     MediaDetailView.Path = arrayList.get(position).getImageTitle();
 
                     context.startActivity(intent);
-
                 }
             });
         }
