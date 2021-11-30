@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +42,6 @@ public class LikedMain extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.liked_recyclerView);
         recyclerView.setHasFixedSize(true);     //리사이클러뷰 성능 강화
-        adapter = new StoreViewAdapter(arrayList, getActivity());
 
         layoutManager = new GridLayoutManager(getContext(),2);//두줄
         recyclerView.setLayoutManager(layoutManager);
@@ -62,6 +62,9 @@ public class LikedMain extends Fragment {
                     arrayList.add(LikedList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
                 }
                 adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
+                if(adapter.getItemCount()==0){
+                    Toast.makeText(view.getContext(),"관심 리스트가 비었습니다.",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -71,6 +74,7 @@ public class LikedMain extends Fragment {
             }
         });
 
+        adapter = new StoreViewAdapter(arrayList, getActivity());
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
 
         return view;

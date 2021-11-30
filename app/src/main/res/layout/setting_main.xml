@@ -2,7 +2,77 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="#ACACAC">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/login_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Setting"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+    <RelativeLayout
+        android:id="@+id/setting_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="?attr/colorPrimary">
+        <TextView
+            android:id="@+id/setting_userid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="userid"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/setting_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email"
+            android:textSize="20sp"
+            android:layout_below="@+id/setting_userid"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/setting_isLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인 되어있습니다."
+        android:textSize="15sp"
+        android:layout_below="@+id/setting_user"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+
+    <Button
+        android:id="@+id/setting_logoutButton"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="로그아웃"
+        />
+
+    <Button
+        android:id="@+id/setting_delete"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:text="회원탈퇴"
+        android:textSize="15sp"
+        android:layout_below="@+id/setting_logoutButton"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+
 
 </LinearLayout>

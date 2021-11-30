@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/activity_login.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/activity_main.xml" value="0.1539855072463768" />
+        <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/hotel_main.xml" value="0.1539855072463768" />
         <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/info_list.xml" value="0.1" />
+        <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/liked_main.xml" value="0.1539855072463768" />
         <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/list_item.xml" value="0.1" />
         <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/media_list.xml" value="0.2" />
         <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/media_main.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/setting_main.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/shop_main.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/82103/AndroidStudioProjects/Team_2/app/src/main/res/layout/store_list.xml" value="0.1" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable-v24/main_layout_bottom_bar.xml" value="0.1" />
         <entry key="..\:/Users/SAMSUNG/StudioProjects/Team_2/app/src/main/res/drawable/btn_notsave.xml" value="0.17777777777777778" />
