@@ -29,7 +29,7 @@ public class MediaDetailView extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
 
-    private String Name, Content;
+    private String Name, Path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +37,10 @@ public class MediaDetailView extends AppCompatActivity {
         setContentView(R.layout.media_detail_view);
 
         TextView MediaDetailTitle = findViewById(R.id.media_detail_title);
-        TextView MediaDetailContent = findViewById(R.id.media_detail_content);
 
         Intent intent = getIntent();
 
         MediaDetailTitle.setText(intent.getStringExtra("Path"));
-        MediaDetailContent.setText(intent.getStringExtra("Title"));
 
         recyclerView = (RecyclerView)findViewById(R.id.shop_recyclerView);
         recyclerView.setHasFixedSize(true);     //리사이클러뷰 성능 강화
@@ -53,12 +51,12 @@ public class MediaDetailView extends AppCompatActivity {
         arrayList = new ArrayList<MediaDetailList>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
 
         Name = MediaDetailTitle.getText().toString();
-        Content = MediaDetailContent.getText().toString();
+        Path = MediaMain.pathName;
 
         adapter = new MediaDetailViewAdapter(arrayList, this);
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("환경정보").child(Name);
+        databaseReference = database.getReference("환경정보").child(Path);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

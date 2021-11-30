@@ -84,6 +84,9 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.Stor
                     intent.putExtra("TelNum", arrayList.get(position).getCallStr());
                     intent.putExtra("Address", arrayList.get(position).getAddressStr());
 
+                    MainActivity.saveX = arrayList.get(position).getX();
+                    MainActivity.saveY = arrayList.get(position).getY();
+
                     context.startActivity(intent);
 
                 }

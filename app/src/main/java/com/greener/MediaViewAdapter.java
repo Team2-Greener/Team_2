@@ -70,7 +70,6 @@ public class MediaViewAdapter extends RecyclerView.Adapter<MediaViewAdapter.Medi
                     int position = getAdapterPosition();
 
                     Intent intent = new Intent(context, MediaDetailView.class);
-                    intent.putExtra("Path", arrayList.get(position).getImageTitle());
                     intent.putExtra("Title", arrayList.get(position).getTitleStr());
 
                     context.startActivity(intent);
