@@ -1,4 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name = "SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
     <!-- Base application theme. -->
     <style name="Theme.Greener" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
