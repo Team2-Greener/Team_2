@@ -2,6 +2,7 @@ package com.greener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -24,6 +25,9 @@ public class SearchMain extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private RecyclerView.Adapter adapter;
     private ArrayList<StoreList> arrayList = new ArrayList<>();
+
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
     private String searchStr;
 
     @Override
@@ -36,8 +40,14 @@ public class SearchMain extends AppCompatActivity {
 
         // System.out.println("검색 내용 : "+ searchStr);
 
+        recyclerView = findViewById(R.id.hotel_recyclerView); // 아디 연결
+        recyclerView.setHasFixedSize(true); // 리사이클러뷰 기존성능 강화
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
         arrayList = new ArrayList<>();
-        arrayList.clear();
+        // arrayList.clear();
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("샵");
@@ -87,6 +97,6 @@ public class SearchMain extends AppCompatActivity {
         }
 
         adapter = new StoreViewAdapter(arrayList, this);
-        // recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
     }
 }
