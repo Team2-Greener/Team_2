@@ -190,6 +190,9 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
         this.naverMap = naverMap;
         naverMap.setLocationSource(mLocationSource);
 
+        // CameraPosition cameraPosition = new CameraPosition(mLocationSource, 13);
+        // naverMap.setCameraPosition(cameraPosition);
+
         UiSettings uiSettings = naverMap.getUiSettings();
         uiSettings.setCompassEnabled(false); // 기본값 : true
         uiSettings.setLocationButtonEnabled(true); // 기본값 : false
