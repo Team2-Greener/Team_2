@@ -18,10 +18,10 @@ import java.util.ArrayList;
 
 public class MediaDetailViewAdapter extends RecyclerView.Adapter<MediaDetailViewAdapter.MediaViewHolder> {
 
-    private ArrayList<MediaList> arrayList;
+    private ArrayList<MediaDetailList> arrayList;
     private Context context;
 
-    public MediaDetailViewAdapter(ArrayList<MediaList> arrayList, Context context) {
+    public MediaDetailViewAdapter(ArrayList<MediaDetailList> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -30,7 +30,7 @@ public class MediaDetailViewAdapter extends RecyclerView.Adapter<MediaDetailView
     @NonNull
     @Override
     public MediaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_detail_list, parent, false);
         MediaViewHolder holder = new MediaViewHolder(view);
 
         return holder;
@@ -41,8 +41,7 @@ public class MediaDetailViewAdapter extends RecyclerView.Adapter<MediaDetailView
     public void onBindViewHolder(@NonNull MediaViewHolder holder, int position) {
         Glide.with(holder.itemView)
                 .load(Uri.parse(arrayList.get(position).getImageUri()))
-                .into(holder.media_image);
-        holder.media_title.setText(arrayList.get(position).getTitleStr());
+                .into(holder.media_detail_image);
     }
 
     // 몇개의 데이터를 리스트로 뿌려줘야하는지 반드시 정의해줘야한다
@@ -52,29 +51,12 @@ public class MediaDetailViewAdapter extends RecyclerView.Adapter<MediaDetailView
     }
 
     public class MediaViewHolder extends RecyclerView.ViewHolder {
-        ImageView media_image;
-        TextView media_title;
+        ImageView media_detail_image;
 
         public MediaViewHolder (@NonNull View itemView) {
             super(itemView);
 
-            this.media_image = itemView.findViewById(R.id.media_image);
-            this.media_title = itemView.findViewById(R.id.media_title);
-
-            itemView.setClickable(true);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-
-                    Intent intent = new Intent(context, MediaDetailView.class);
-                    intent.putExtra("Path", arrayList.get(position).getImageTitle());
-                    intent.putExtra("Title", arrayList.get(position).getTitleStr());
-
-                    context.startActivity(intent);
-
-                }
-            });
+            this.media_detail_image = itemView.findViewById(R.id.media_detail_image);
         }
 
     }

@@ -3,16 +3,14 @@ package com.greener;
 public class StoreDetailList {
     private String imageUri;
     private int num;
-    private Boolean save;
 
     public StoreDetailList() {
 
     }
 
-    public StoreDetailList(String imageUri, int num, Boolean save) {
+    public StoreDetailList(String imageUri, int num) {
         this.imageUri = imageUri;
         this.num = num;
-        this.save = save;
     }
 
     public String getImageUri() {
@@ -31,11 +29,4 @@ public class StoreDetailList {
         this.num = num;
     }
 
-    public Boolean getSave() {
-        return save;
-    }
-
-    public void setSave(Boolean save) {
-        this.save = save;
-    }
 }

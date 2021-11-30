@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private MenuItem search_menu;
     public static int fragNum;
 
-    public static String uid;
+    public static String uid, saveX, saveY;
     public static Context context_main;
 
     @Override
