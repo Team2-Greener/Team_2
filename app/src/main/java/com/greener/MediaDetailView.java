@@ -53,8 +53,6 @@ public class MediaDetailView extends AppCompatActivity {
 
         Title = MediaDetailTitle.getText().toString();
 
-        adapter = new MediaDetailViewAdapter(arrayList, this);
-
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("환경정보").child(Path);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -77,6 +75,8 @@ public class MediaDetailView extends AppCompatActivity {
             }
         });
 
+        adapter = new MediaDetailViewAdapter(arrayList, this);
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
     }
+
 }
