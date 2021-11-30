@@ -8,8 +8,9 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/media_detail_topbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:orientation="horizontal"
         android:background="@color/main_color" >
 
@@ -22,21 +23,10 @@
             android:background="@drawable/toleft"
             android:backgroundTint="@color/dark_greener"/>
 
-        <TextView
-            android:id="@+id/media_detail_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:gravity="center_vertical"
-            android:text="가게이름"
-            android:textSize="50dp"
-            android:textColor="@color/dark_greener"/>
-
-
     </LinearLayout>
 
     <TextView
-        android:id="@+id/media_detail_content"
+        android:id="@+id/media_detail_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -44,25 +34,12 @@
         android:text="content"
         android:textColor="@color/dark_greener" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/media_detail_frame"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/media_detail_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/media_detail_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/media_detail_content"
-            android:overScrollMode="never"
-            android:scrollbars="vertical"
-            tools:ignore="NotSibling" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:overScrollMode="never"
+        android:scrollbars="vertical" />
 
 </LinearLayout>
