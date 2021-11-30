@@ -28,12 +28,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.MapView;
+import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 
 import java.util.ArrayList;
 
-public class StoreDetailView extends AppCompatActivity implements View.OnClickListener{
+public class StoreDetailView extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
+    private MapView mapView;
+    private NaverMap naverMap;
 
     private ArrayList<String> arrayList;
     private FirebaseDatabase database, likedDatabase, saveDatabase;
@@ -85,6 +93,10 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         TextView StoreDetailName = findViewById(R.id.store_detail_name);
         TextView StoreDetailTelNum = findViewById(R.id.store_detail_telNum);
         TextView StoreDetailAddress = findViewById(R.id.store_detail_address);
+
+        mapView = (MapView) findViewById(R.id.map_view);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
 
         Intent intent = getIntent();
 
@@ -214,5 +226,14 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
 
             finish();
         }
+    }
+
+    @Override
+    public void onMapReady(@NonNull NaverMap naverMap) {
+        this.naverMap = naverMap;
+
+        CameraPosition cameraPosition = new CameraPosition(
+                new LatLng(37.5670135, 126.9783740), 13);
+        naverMap.setCameraPosition(cameraPosition);
     }
 }
