@@ -15,8 +15,10 @@
         android:id="@+id/edit_review"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:inputType="text"
-        android:hint="리뷰를 작성해주세요."
+        android:inputType="textMultiLine"
+        android:hint="리뷰를 작성해주세요. (최대 300자)"
         android:gravity="top"
+        android:scrollHorizontally="false"
+        android:maxLength="300"
         />
 </LinearLayout>
