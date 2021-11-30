@@ -37,8 +37,6 @@ import java.util.List;
 public class ShopMap extends Fragment implements OnMapReadyCallback {
     private MapView mapView;
     private ArrayList<StoreList> arrayList = new ArrayList<>();
-    private ArrayList<LatLng> arrayListLatLng = new ArrayList<>();
-    private List<Address> addrList = null;
     private DatabaseReference databaseReference;
     private NaverMap naverMap;
     private FusedLocationSource mLocationSource;

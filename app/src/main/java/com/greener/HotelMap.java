@@ -58,8 +58,6 @@ import java.util.concurrent.Executors;
 public class HotelMap extends Fragment implements OnMapReadyCallback {
     private MapView mapView;
     private ArrayList<StoreList> arrayList = new ArrayList<>();
-    private ArrayList<LatLng> arrayListLatLng = new ArrayList<>();
-    private List<Address> addrList = null;
     private DatabaseReference databaseReference;
     private NaverMap naverMap;
     private FusedLocationSource mLocationSource;
