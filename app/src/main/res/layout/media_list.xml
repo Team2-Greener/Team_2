@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/mediaBackgroundView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="13dp"
         android:layout_marginRight="13dp"
@@ -16,7 +16,7 @@
         app:cardCornerRadius="25dp"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent">
-        app:layout_constraintTop_toBottomOf="@+id/media_title" >
+        <!--app:layout_constraintTop_toBottomOf="@+id/media_title" -->
 
         <ImageView
             android:id="@+id/media_image"
@@ -24,8 +24,8 @@
             android:layout_height="350dp"
             android:scaleType = "centerCrop"
             android:requestLegacyExternalStorage="true"
-            android:src="@drawable/sample"
-            android:background="@drawable/round_image" />
+            android:src="@drawable/sample" />
+            <!--android:background="@drawable/round_image" -->
 
     </androidx.cardview.widget.CardView>
 
@@ -36,6 +36,9 @@
         android:textSize="15sp"
         android:layout_below="@+id/mediaBackgroundView"
         android:layout_alignLeft="@+id/mediaBackgroundView"
+        android:layout_alignRight="@+id/mediaBackgroundView"
+        android:textAlignment="center"
+        android:gravity="center"
         android:text="타이틀" />
 
 </RelativeLayout>

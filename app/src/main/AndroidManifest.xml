@@ -18,6 +18,9 @@
             android:name=".StoreDetailView"
             android:exported="false" />
         <activity
+            android:name=".MediaDetailView"
+            android:exported="false" />
+        <activity
             android:name=".SearchMain"
             android:exported="true" />
         <activity

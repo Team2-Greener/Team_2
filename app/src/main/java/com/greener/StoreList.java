@@ -57,11 +57,12 @@ public class StoreList {
         this.x = x;
     }
 
+    public String getX() { return x; }
+
     public void setY(String y) {
         this.y = y;
     }
 
-    public String getX() { return x; }
     public String getY() { return y; }
 
 }

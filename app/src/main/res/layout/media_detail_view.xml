@@ -45,7 +45,7 @@
         android:textColor="@color/dark_greener" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/shop_main_frame"
+        android:id="@+id/media_detail_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
@@ -53,7 +53,7 @@
         android:layout_marginLeft="10dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/shop_recyclerView"
+            android:id="@+id/media_detail_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
