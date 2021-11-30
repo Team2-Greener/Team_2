@@ -29,7 +29,7 @@ public class MediaMain extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<MediaList> arrayList;
     private DatabaseReference databaseReference;
-    //private FirebaseDatabase database;
+    private FirebaseDatabase database;
 
     private View view;
 
@@ -49,8 +49,8 @@ public class MediaMain extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
 
-        //database = FirebaseDatabase.getInstance();
-        databaseReference = MainActivity.database.getReference("환경정보메인"); // DB 테이블 연결
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("환경정보메인"); // DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

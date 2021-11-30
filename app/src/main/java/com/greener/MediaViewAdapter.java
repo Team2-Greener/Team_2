@@ -63,7 +63,7 @@ public class MediaViewAdapter extends RecyclerView.Adapter<MediaViewAdapter.Medi
             this.media_image = itemView.findViewById(R.id.media_image);
             this.media_title = itemView.findViewById(R.id.media_title);
 
-            /*itemView.setClickable(true);
+            itemView.setClickable(true);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -78,8 +78,6 @@ public class MediaViewAdapter extends RecyclerView.Adapter<MediaViewAdapter.Medi
 
                 }
             });
-
-             */
         }
 
     }
