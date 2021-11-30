@@ -27,11 +27,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseDatabase firebaseDatabase;
     private EditText username_edit, email_edit, password_edit, checkPWD_edit;
     Button register_button;
     private boolean isCompleted = false;
     private BackPressHandler backPressHandler = new BackPressHandler(this);
+    private UsersList usersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
         register_button = findViewById(R.id.signupedButton);
         findViewById(R.id.signupedButton).setOnClickListener(onClickListener);
         findViewById(R.id.back_login).setOnClickListener(onClickListener);
-        firebaseAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -95,6 +96,19 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             FirebaseUser user =  firebaseAuth.getCurrentUser();
+
+                            usersList = new UsersList();
+
+                            usersList.setUid(user.getUid());
+                            usersList.setEmail(email);
+                            usersList.setName(name);
+
+                            // database에 저장
+                            String path = "users/" + user.getUid();
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(path); // DB 테이블 연결
+
+                            databaseReference.setValue(usersList);
+
                             startToast("회원가입 성공");
 
                             myStartActivity(LoginActivity.class);
