@@ -206,10 +206,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         int id = view.getId();
 
         if(id == R.id.btn_go_back) {
-            int fragnum = MainActivity.fragNum;
-
-            ((MainActivity)MainActivity.context_main).setFragment(fragnum);
-            finish();
+            onBackPressed();
         }
         else if(id == R.id.store_detail_review) {
             intent = new Intent(this, StoreDetailReview.class);
