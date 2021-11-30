@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         //Toolbar 추가하기
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setIcon(R.drawable.greener);
         getSupportActionBar().setDisplayShowTitleEnabled(false);    //title 안보이게하기
 
         //화면 전환
