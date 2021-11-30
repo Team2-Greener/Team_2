@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MediaDetailView extends AppCompatActivity {
+public class MediaDetailView extends AppCompatActivity implements View.OnClickListener{
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -29,6 +30,7 @@ public class MediaDetailView extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
 
+    private Button Back;
     private String Title;
     public static String Path;
 
@@ -38,6 +40,9 @@ public class MediaDetailView extends AppCompatActivity {
         setContentView(R.layout.media_detail_view);
 
         TextView MediaDetailTitle = findViewById(R.id.media_detail_title);
+
+        Back = findViewById(R.id.btn_go_back);
+        Back.setOnClickListener(this);
 
         Intent intent = getIntent();
 
@@ -77,6 +82,20 @@ public class MediaDetailView extends AppCompatActivity {
 
         adapter = new MediaDetailViewAdapter(arrayList, this);
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
+    }
+
+
+    public void onClick(View view) {
+
+        onBackPressed();
+        /*
+        int id = view.getId();
+
+        if(id == R.id.btn_go_back) {
+            onBackPressed();
+        }
+
+         */
     }
 
 }
