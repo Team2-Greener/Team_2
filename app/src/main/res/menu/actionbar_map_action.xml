@@ -6,6 +6,7 @@
         android:id="@+id/search_action"
         android:enabled="true"
         android:icon="@drawable/search"
+        android:iconTint="@color/dark_greener"
         android:title="search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.widget.SearchView" />
@@ -14,6 +15,7 @@
         android:id="@+id/list_view_action"
         android:enabled="true"
         android:icon="@drawable/list"
+        android:iconTint="@color/dark_greener"
         android:title="list"
         app:showAsAction="ifRoom"/>
 

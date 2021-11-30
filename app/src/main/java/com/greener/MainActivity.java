@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
         fragNum = 0;
         //Toolbar 추가하기
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.greener); //로고 넣기
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);    //title 안보이게하기
 
         //화면 전환
         bottomNavigationView = findViewById(R.id.bottom_navigation);
