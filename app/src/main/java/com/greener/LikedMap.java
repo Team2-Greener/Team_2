@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
@@ -38,6 +40,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class LikedMap extends Fragment implements OnMapReadyCallback {
+
+    private GPSTracker gpsTracker;
     private MapView mapView;
     private NaverMap naverMap;
     private FusedLocationSource mLocationSource;
@@ -46,6 +50,7 @@ public class LikedMap extends Fragment implements OnMapReadyCallback {
     private DatabaseReference databaseReference;
     private FirebaseDatabase database;
     private View view;
+    private Button btn;
 
     private OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
 
@@ -61,6 +66,8 @@ public class LikedMap extends Fragment implements OnMapReadyCallback {
         System.out.println("Liked Map changed");
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.liked_map, container, false);
+
+        btn = (Button)view.findViewById(R.id.btn);
 
         mapView = (MapView)view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
@@ -93,6 +100,18 @@ public class LikedMap extends Fragment implements OnMapReadyCallback {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // 디비를 가져오던중 에러 발생 시
                 Log.e("TestActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gpsTracker = new GPSTracker(getContext());
+
+                double latitude = gpsTracker.getLatitude();
+                double longitude = gpsTracker.getLongitude();
+
+                CameraPosition cameraPosition = new CameraPosition(new LatLng(latitude, longitude), 13);
+                naverMap.setCameraPosition(cameraPosition);
             }
         });
 
