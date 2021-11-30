@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -52,7 +53,8 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
 
-    private Button Back, Review;
+    private Button Back, Review, Map;
+    private FrameLayout mapFrame;
     private static Button Save;
 
     private String Name, Tel, Add, X, Y;
@@ -65,10 +67,15 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.store_detail_view);
 
         Back = findViewById(R.id.btn_go_back);
+        Map = findViewById(R.id.store_detail_map);
         Review = findViewById(R.id.store_detail_review);
         Save = findViewById(R.id.btn_to_save);
 
+        mapFrame = findViewById(R.id.map_frame);
+        mapFrame.setVisibility(View.INVISIBLE);
+
         Back.setOnClickListener(this);
+        Map.setOnClickListener(this);
         Review.setOnClickListener(this);
 
         X = MainActivity.saveX;
@@ -234,7 +241,10 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
             intent = new Intent(this, StoreDetailReview.class);
             this.startActivity(intent);
 
-            finish();
+            // finish();
+        }
+        else if(id == R.id.store_detail_map){
+            mapFrame.setVisibility(View.VISIBLE);
         }
     }
 
