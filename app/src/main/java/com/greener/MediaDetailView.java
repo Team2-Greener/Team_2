@@ -29,7 +29,8 @@ public class MediaDetailView extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
 
-    private String Name, Path;
+    private String Title;
+    public static String Path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,9 @@ public class MediaDetailView extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        MediaDetailTitle.setText(intent.getStringExtra("Path"));
+        MediaDetailTitle.setText(intent.getStringExtra("Title"));
 
-        recyclerView = (RecyclerView)findViewById(R.id.shop_recyclerView);
+        recyclerView = (RecyclerView)findViewById(R.id.media_detail_recyclerView);
         recyclerView.setHasFixedSize(true);     //리사이클러뷰 성능 강화
 
         layoutManager = new LinearLayoutManager(this);
@@ -50,8 +51,7 @@ public class MediaDetailView extends AppCompatActivity {
 
         arrayList = new ArrayList<MediaDetailList>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
 
-        Name = MediaDetailTitle.getText().toString();
-        Path = MediaMain.pathName;
+        Title = MediaDetailTitle.getText().toString();
 
         adapter = new MediaDetailViewAdapter(arrayList, this);
 

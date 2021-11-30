@@ -33,8 +33,6 @@ public class MediaMain extends Fragment {
 
     private View view;
 
-    public static String pathName;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,7 +44,6 @@ public class MediaMain extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.media_recyclerView);
         recyclerView.setHasFixedSize(true);     //리사이클러뷰 성능 강화
-        adapter = new MediaViewAdapter(arrayList, getActivity());
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -62,8 +59,6 @@ public class MediaMain extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
                     MediaList ContentList = snapshot.getValue(MediaList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
 
-                    pathName = ContentList.getImageTitle();
-
                     arrayList.add(ContentList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
                 }
                 adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
@@ -76,6 +71,7 @@ public class MediaMain extends Fragment {
             }
         });
 
+        adapter = new MediaViewAdapter(arrayList, getActivity());
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
 
         return view;
