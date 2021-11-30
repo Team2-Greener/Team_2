@@ -17,7 +17,6 @@ public class MediaList {
         this.imageUri = imageUri;
     }
 
-    public String getTitleStr() { return titleStr; }
     public String getImageTitle() {
         return imageTitle;
     }
@@ -25,6 +24,8 @@ public class MediaList {
     public void setImageTitle(String imageTitle) {
         this.imageTitle = imageTitle;
     }
+
+    public String getTitleStr() { return titleStr; }
 
     public void setTitleStr(String titleStr) { this.titleStr = titleStr; }
 }
