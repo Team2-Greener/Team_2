@@ -21,9 +21,6 @@
             android:name=".MediaDetailView"
             android:exported="false" />
         <activity
-            android:name=".SearchMain"
-            android:exported="true" />
-        <activity
             android:name=".LikedMain"
             android:exported="true"
             tools:ignore="Instantiatable" />

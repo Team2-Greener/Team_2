@@ -63,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
         fragNum = 0;
         //Toolbar 추가하기
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.greener); //로고 넣기
         setSupportActionBar(toolbar);
+        getSupportActionBar().setIcon(R.drawable.greener);
         getSupportActionBar().setDisplayShowTitleEnabled(false);    //title 안보이게하기
 
         //화면 전환
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -115,30 +116,6 @@ public class MainActivity extends AppCompatActivity {
         //toolbar menu 구성
         getMenuInflater().inflate(R.menu.actionbar_list_action, menu);
 
-        //검색버튼 등록
-        search_menu = menu.findItem(R.id.search_action);
-        //searchView 크기 꽉차도록
-        SearchView searchView = (SearchView) search_menu.getActionView();
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-
-        searchView.setQueryHint("검색어를 입력하세요");
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Intent intent = new Intent(getApplicationContext(), SearchMain.class);
-                intent.putExtra("검색 내용", query);
-                startActivity(intent);
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
         return true;
     }
 
@@ -146,10 +123,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.search_action) {
-            //todo search 구현 && bottombar 지우기
-        }
-        else if(id == R.id.list_view_action) {
+        if(id == R.id.list_view_action) {
             System.out.println("list_view call");
 
             setFragment(fragNum);
