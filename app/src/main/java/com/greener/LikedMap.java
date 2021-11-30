@@ -42,7 +42,6 @@ public class LikedMap extends Fragment implements OnMapReadyCallback {
     private NaverMap naverMap;
     private FusedLocationSource mLocationSource;
     private InfoWindow mInfoWindow;
-    private ArrayList<StoreList> arrayList;
 
     private DatabaseReference databaseReference;
     private FirebaseDatabase database;
@@ -78,23 +77,15 @@ public class LikedMap extends Fragment implements OnMapReadyCallback {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                arrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
                     StoreList LikedList = snapshot.getValue(StoreList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
 
-                    MainActivity.saveX = LikedList.getX();
-                    MainActivity.saveY = LikedList.getY();
-
-                    arrayList.add(LikedList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
-
-                    System.out.println("x : "+LikedList.getX()+", y : "+LikedList.getY());
+                    // System.out.println("x : "+LikedList.getX()+", y : "+LikedList.getY());
 
                     Double x = Double.parseDouble(LikedList.getX());
                     Double y = Double.parseDouble(LikedList.getY());
                     LatLng ll = new LatLng(x, y);
                     setmark(LikedList.getNameStr(), ll);
-
-
                 }
             }
 
@@ -108,13 +99,6 @@ public class LikedMap extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.actionbar_map_action, menu);
-    }
-
     private void setmark(String name, LatLng latlng) {
         Marker marker = new Marker();
         marker.setPosition(latlng); // 마커 위치 찍기
@@ -122,7 +106,6 @@ public class LikedMap extends Fragment implements OnMapReadyCallback {
         marker.setHeight(100);
         marker.setIcon(image); // 마커 이미지 넣기
         marker.setCaptionText(name);
-
 
         marker.setOnClickListener(new Overlay.OnClickListener(){
             @Override
@@ -155,6 +138,12 @@ public class LikedMap extends Fragment implements OnMapReadyCallback {
         uiSettings.setLocationButtonEnabled(true); // 기본값 : false
 
         mInfoWindow = new InfoWindow();
-        arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.actionbar_map_action, menu);
     }
 }

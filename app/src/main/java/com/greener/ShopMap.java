@@ -36,7 +36,6 @@ import java.util.List;
 
 public class ShopMap extends Fragment implements OnMapReadyCallback {
     private MapView mapView;
-    private ArrayList<StoreList> arrayList = new ArrayList<>();
     private DatabaseReference databaseReference;
     private NaverMap naverMap;
     private FusedLocationSource mLocationSource;
@@ -71,10 +70,8 @@ public class ShopMap extends Fragment implements OnMapReadyCallback {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     StoreList HotelList = snapshot.getValue(StoreList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
-                    arrayList.add(HotelList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
 
                     Double x = Double.parseDouble(HotelList.getX());
                     Double y = Double.parseDouble(HotelList.getY());
@@ -132,7 +129,6 @@ public class ShopMap extends Fragment implements OnMapReadyCallback {
         uiSettings.setLocationButtonEnabled(true); // 기본값 : false
 
         mInfoWindow = new InfoWindow();
-        arrayList = new ArrayList<>();
     }
 
     @Override
