@@ -53,7 +53,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
     private Button Back, Review;
     private static Button Save;
 
-    private String Name, Tel, Add;
+    private String Name, Tel, Add, X, Y;
     private String Image, path;
 
     @Override
@@ -68,6 +68,11 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         Back.setOnClickListener(this);
         Review.setOnClickListener(this);
 
+        X = MainActivity.saveX;
+        Y = MainActivity.saveY;
+
+        // System.out.println("X : "+X+", Y : "+Y);
+
         Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +86,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
                 else if(Save.isSelected() == false){
                     Save.setSelected(true);
 
-                    StoreList liked = new StoreList(Add, Tel, Image, Name);
+                    StoreList liked = new StoreList(Add, Tel, Image, Name, X, Y);
 
                     likedReference = likedDatabase.getInstance().getReference();
 

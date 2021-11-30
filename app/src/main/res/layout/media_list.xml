@@ -16,7 +16,7 @@
         app:cardCornerRadius="25dp"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent">
-        <!--app:layout_constraintTop_toBottomOf="@+id/media_title">-->
+        app:layout_constraintTop_toBottomOf="@+id/media_title" >
 
         <ImageView
             android:id="@+id/media_image"
@@ -24,8 +24,8 @@
             android:layout_height="350dp"
             android:scaleType = "centerCrop"
             android:requestLegacyExternalStorage="true"
-            android:src="@drawable/sample" />
-        <!--android:background="@drawable/round_image"-->
+            android:src="@drawable/sample"
+            android:background="@drawable/round_image" />
 
     </androidx.cardview.widget.CardView>
 

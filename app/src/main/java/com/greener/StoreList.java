@@ -12,11 +12,13 @@ public class StoreList {
 
     }
 
-    public StoreList(String addressStr, String callStr, String imageUri, String nameStr) {
+    public StoreList(String addressStr, String callStr, String imageUri, String nameStr, String x, String y) {
         this.addressStr = addressStr;
         this.callStr = callStr;
         this.imageUri = imageUri;
         this.nameStr = nameStr;
+        this.x = x;
+        this.y = y;
     }
 
     public String getImageUri() {
@@ -49,6 +51,14 @@ public class StoreList {
 
     public void setCallStr(String callStr) {
         this.callStr = callStr;
+    }
+
+    public void setX(String x) {
+        this.x = x;
+    }
+
+    public void setY(String y) {
+        this.y = y;
     }
 
     public String getX() { return x; }
