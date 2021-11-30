@@ -3,9 +3,6 @@ package com.greener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -26,18 +23,11 @@ import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
-import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
-
-import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 public class LikedMap extends Fragment implements OnMapReadyCallback {
 
@@ -151,10 +141,6 @@ public class LikedMap extends Fragment implements OnMapReadyCallback {
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
         naverMap.setLocationSource(mLocationSource);
-
-        UiSettings uiSettings = naverMap.getUiSettings();
-        uiSettings.setCompassEnabled(false); // 기본값 : true
-        uiSettings.setLocationButtonEnabled(true); // 기본값 : false
 
         mInfoWindow = new InfoWindow();
     }

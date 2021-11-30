@@ -23,7 +23,6 @@ import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
-import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
@@ -139,10 +138,6 @@ public class ShopMap extends Fragment implements OnMapReadyCallback {
 
         this.naverMap = naverMap;
         naverMap.setLocationSource(mLocationSource);
-
-        UiSettings uiSettings = naverMap.getUiSettings();
-        uiSettings.setCompassEnabled(false); // 기본값 : true
-        uiSettings.setLocationButtonEnabled(true); // 기본값 : false
 
         mInfoWindow = new InfoWindow();
     }
