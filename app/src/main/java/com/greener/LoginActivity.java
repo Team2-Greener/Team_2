@@ -47,8 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             // Call Next Activity
             intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.putExtra("STD_NUM", SaveSharedPreference.getUserName(this));
-
-            Toast.makeText(this,"로그인 되었습니다."+SaveSharedPreference.getUserName(LoginActivity.this).length(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"로그인 되었습니다.", Toast.LENGTH_SHORT).show();
             startActivity(intent);
             this.finish();
         }
