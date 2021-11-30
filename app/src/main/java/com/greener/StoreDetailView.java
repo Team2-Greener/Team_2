@@ -209,7 +209,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
 
         arrayList_show_review = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
 
-        databaseReference_show_review = database.getReference("reviews"); // DB 테이블 연결
+        databaseReference_show_review = database.getReference("reviews/"+Name); // DB 테이블 연결
         databaseReference_show_review.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -220,7 +220,6 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
                     arrayList_show_review.add(review); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
                 }
                 adapter_show_review.notifyDataSetChanged(); // 리스트 저장 및 새로고침
-                Log.d("SIZE : ",String.valueOf(adapter_show_review.getItemCount()));
             }
 
             @Override
@@ -263,9 +262,10 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
                                                 review.setText(value);
                                                 dialog.dismiss();
                                                 // database에 저장
-                                                String path = "reviews/"+now.format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH:mm:ss"));;
+                                                String path = "reviews/"+Name+"/"+now.format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH:mm:ss"));;
                                                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(path); // DB 테이블 연결
                                                 databaseReference.setValue(review);
+                                                Toast.makeText(StoreDetailView.this,"리뷰가 저장되었습니다.",Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     }
