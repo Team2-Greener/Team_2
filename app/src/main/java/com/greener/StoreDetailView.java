@@ -63,6 +63,8 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         X = MainActivity.saveX;
         Y = MainActivity.saveY;
 
+        // System.out.println("X : "+X+", Y : "+Y);
+
         Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
