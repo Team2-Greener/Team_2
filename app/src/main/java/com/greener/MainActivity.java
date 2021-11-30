@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        database = FirebaseDatabase.getInstance();
+
         //현재 유저의 uid 받아오기
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {

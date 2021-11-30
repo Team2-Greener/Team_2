@@ -1,20 +1,12 @@
 package com.greener;
 
 public class MediaList {
-    private String imageUri;
     private String imageTitle;
+    private String imageUri;
     private String titleStr ;
 
     public MediaList() {
 
-    }
-
-    public String getImageUri() {
-        return imageUri;
-    }
-
-    public void setImageUri(String imageUri) {
-        this.imageUri = imageUri;
     }
 
     public String getImageTitle() {
@@ -23,6 +15,14 @@ public class MediaList {
 
     public void setImageTitle(String imageTitle) {
         this.imageTitle = imageTitle;
+    }
+
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 
     public String getTitleStr() { return titleStr; }
