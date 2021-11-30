@@ -54,7 +54,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
     private LinearLayout layoutIndicator;
 
     private Button Back, Review, Map;
-    private FrameLayout mapFrame;
+    private FrameLayout mapFrame,reviewFrame;
     private static Button Save;
 
     private String Name, Tel, Add, X, Y;
@@ -73,6 +73,8 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
 
         mapFrame = findViewById(R.id.map_frame);
         mapFrame.setVisibility(View.INVISIBLE);
+        reviewFrame = findViewById(R.id.review_frame);
+        reviewFrame.setVisibility(View.INVISIBLE);
 
         Back.setOnClickListener(this);
         Map.setOnClickListener(this);
@@ -238,10 +240,14 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
             onBackPressed();
         }
         else if(id == R.id.store_detail_review) {
+            reviewFrame.setVisibility(View.VISIBLE);
+            /*
             intent = new Intent(this, StoreDetailReview.class);
             this.startActivity(intent);
 
-            // finish();
+            finish();
+
+             */
         }
         else if(id == R.id.store_detail_map){
             mapFrame.setVisibility(View.VISIBLE);
