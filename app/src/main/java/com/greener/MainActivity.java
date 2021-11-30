@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
-    public static FirebaseDatabase database;
 
     private BottomNavigationView bottomNavigationView;
     private FragmentManager manager;
@@ -52,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        database = FirebaseDatabase.getInstance();
 
         //현재 유저의 uid 받아오기
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -126,15 +123,19 @@ public class MainActivity extends AppCompatActivity {
 
         searchView.setQueryHint("검색어를 입력하세요");
 
-        //검색 클릭하면 SearchMain으로 이동
-        search_menu.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
+            public boolean onQueryTextSubmit(String query) {
                 Intent intent = new Intent(getApplicationContext(), SearchMain.class);
+                intent.putExtra("검색 내용", query);
                 startActivity(intent);
 
-                return true;
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
 

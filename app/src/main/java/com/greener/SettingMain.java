@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,14 +29,25 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class SettingMain extends Fragment {
 
     private View view;
     public static String uid;
     public static String userEmail;
+    private String username;
 
-    private FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference;
+    private ArrayList<UsersList> arrayList;
 
     private TextView setting_userid;
     private TextView setting_email;
@@ -59,15 +71,36 @@ public class SettingMain extends Fragment {
         setting_email = view.findViewById(R.id.setting_email);
         setting_logoutButton = view.findViewById(R.id.setting_logoutButton);
         setting_delete = view.findViewById(R.id.setting_delete);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-
+        arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
         //현재 유저의 uid 받아오기
+        uid = firebaseAuth.getUid();
+
+        databaseReference = database.getReference("users"); // DB 테이블 연결
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                arrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
+                    UsersList u = snapshot.getValue(UsersList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
+                    if(u.getUid().equals(uid)) {
+                        username = u.getName();
+                        setting_userid.setText(username);
+                    }
+                    arrayList.add(u); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("LikedMain", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            uid = user.getUid();
             userEmail=user.getEmail();
-            setting_userid.setText(uid);
             setting_email.setText(userEmail);
         }
         else setting_isLogin.setText("로그인 정보가 없습니다.");

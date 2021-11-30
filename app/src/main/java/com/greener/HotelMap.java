@@ -1,14 +1,8 @@
 package com.greener;
 
-import android.content.Intent;
-import android.icu.text.IDNA;
-import android.location.Address;
-import android.location.Geocoder;
-import android.net.Uri;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.provider.Telephony;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,13 +10,10 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,20 +33,10 @@ import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 public class HotelMap extends Fragment implements OnMapReadyCallback {
+
+    private GPSTracker gpsTracker;
+
     private MapView mapView;
     private DatabaseReference databaseReference;
     private NaverMap naverMap;
@@ -65,6 +46,7 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
     private OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
 
     private View view;
+    private Button btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -78,6 +60,8 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
         System.out.println("Hotel Map changed");
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.hotel_map, container, false);
+
+        btn = (Button)view.findViewById(R.id.btn);
 
         mapView = (MapView)view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
@@ -108,6 +92,19 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gpsTracker = new GPSTracker(getContext());
+
+                double latitude = gpsTracker.getLatitude();
+                double longitude = gpsTracker.getLongitude();
+
+                CameraPosition cameraPosition = new CameraPosition(new LatLng(latitude, longitude), 13);
+                naverMap.setCameraPosition(cameraPosition);
+            }
+        });
+
         return view;
     }
 
@@ -130,12 +127,6 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
                     @Override
                     public CharSequence getText(@NonNull InfoWindow infoWindow)
                     {
-                        /*
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse("tel:"+calNum));
-                        startActivity(intent);
-
-                         */
                         return name;
                     }
                 });
@@ -143,45 +134,6 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
                 return false;
             }
         });
-
-        /*
-        marker.setOnClickListener(overlay -> {
-            mInfoWindow.setAdapter(new InfoWindow.DefaultViewAdapter(getContext()) {
-                @NonNull
-                @Override
-                protected View getContentView(@NonNull InfoWindow infoWindow) {
-                    Marker marker1 = infoWindow.getMarker();
-                    PlaceInfo info = (PlaceInfo) marker1.getTag();
-                    View view = View.inflate(getContext(), R.layout.view_info_window, null);
-                    ((TextView) view.findViewById(R.id.txttitle)).setText(name);
-                    ((TextView) view.findViewById(R.id.txtaddr)).setText(addr);
-                    ((TextView) view.findViewById(R.id.txttel)).setText(calNum);
-                    return view;
-                }
-            });
-            return false;
-        });
-
-
-        marker.setOnClickListener(new Overlay.OnClickListener() {
-            @Override
-            public boolean onClick(@NonNull Overlay overlay) {
-                mInfoWindow.setAdapter(new InfoWindow.ViewAdapter() {
-                    @NonNull
-                    @Override
-                    public View getView(@NonNull InfoWindow infoWindow) {
-                        View view = View.inflate(getContext(), R.layout.view_info_window, null);
-                        ((TextView) view.findViewById(R.id.txttitle)).setText(name);
-                        ((TextView) view.findViewById(R.id.txtaddr)).setText(addr);
-                        ((TextView) view.findViewById(R.id.txttel)).setText(calNum);
-                        return view;
-                    }
-                });
-                return false;
-            }
-        });
-
-         */
         marker.setMap(naverMap);
     }
 
@@ -192,7 +144,6 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
 
         UiSettings uiSettings = naverMap.getUiSettings();
         uiSettings.setCompassEnabled(false); // 기본값 : true
-        uiSettings.setLocationButtonEnabled(true); // 기본값 : false
 
         mInfoWindow = new InfoWindow();
     }
@@ -203,27 +154,4 @@ public class HotelMap extends Fragment implements OnMapReadyCallback {
         menu.clear();
         inflater.inflate(R.menu.actionbar_map_action, menu);
     }
-
-    /*
-    @Override
-    public boolean onClick(@NonNull Overlay overlay) {
-
-        if (overlay instanceof Marker) {
-            Marker marker = (Marker) overlay;
-            if (marker.getInfoWindow() != null) {
-                mInfoWindow.close();
-                Toast.makeText(this.getContext(), "InfoWindow Close.", Toast.LENGTH_LONG).show();
-            }
-            else {
-                mInfoWindow.open(marker);
-                Toast.makeText(this.getContext(), "InfoWindow Open.", Toast.LENGTH_LONG).show();
-            }
-            return true;
-        }
-
-
-        return false;
-    }
-
-     */
 }

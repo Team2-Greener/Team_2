@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -36,12 +37,14 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
+import com.naver.maps.map.overlay.OverlayImage;
 
 import java.util.ArrayList;
 
 public class StoreDetailView extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
     private MapView mapView;
     private NaverMap naverMap;
+    private OverlayImage image = OverlayImage.fromResource(R.drawable.ic_place_marker);
 
     private ArrayList<String> arrayList;
     private FirebaseDatabase database, likedDatabase, saveDatabase;
@@ -50,11 +53,13 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
 
-    private Button Back, Review;
+    private Button Back, Review, Map;
+    private FrameLayout mapFrame,reviewFrame;
     private static Button Save;
 
     private String Name, Tel, Add, X, Y;
     private String Image, path;
+    private Double x, y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +67,21 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.store_detail_view);
 
         Back = findViewById(R.id.btn_go_back);
+        Map = findViewById(R.id.store_detail_map);
         Review = findViewById(R.id.store_detail_review);
         Save = findViewById(R.id.btn_to_save);
 
+        mapFrame = findViewById(R.id.map_frame);
+        reviewFrame = findViewById(R.id.review_frame);
+
         Back.setOnClickListener(this);
+        Map.setOnClickListener(this);
         Review.setOnClickListener(this);
 
         X = MainActivity.saveX;
         Y = MainActivity.saveY;
+        x = Double.parseDouble(X);
+        y = Double.parseDouble(Y);
 
         // System.out.println("X : "+X+", Y : "+Y);
 
@@ -226,10 +238,19 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
             onBackPressed();
         }
         else if(id == R.id.store_detail_review) {
+            mapFrame.setVisibility(View.GONE);
+            reviewFrame.setVisibility(View.VISIBLE);
+            /*
             intent = new Intent(this, StoreDetailReview.class);
             this.startActivity(intent);
 
             finish();
+
+             */
+        }
+        else if(id == R.id.store_detail_map){
+            reviewFrame.setVisibility(View.GONE);
+            mapFrame.setVisibility(View.VISIBLE);
         }
     }
 
@@ -237,8 +258,17 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
 
-        CameraPosition cameraPosition = new CameraPosition(
-                new LatLng(37.5670135, 126.9783740), 13);
+        LatLng latlng = new LatLng(x,y);
+
+        CameraPosition cameraPosition = new CameraPosition(latlng, 15);
         naverMap.setCameraPosition(cameraPosition);
+
+        Marker marker = new Marker();
+        marker.setPosition(latlng);
+        marker.setWidth(100);
+        marker.setHeight(100);
+        marker.setIcon(image); // 마커 이미지 넣기
+        marker.setCaptionText(Name);
+        marker.setMap(naverMap);
     }
 }

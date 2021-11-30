@@ -109,13 +109,13 @@
                 android:weightSum="2">
 
                 <Button
-                    android:id="@+id/store_detail_info"
+                    android:id="@+id/store_detail_map"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/round_button1"
-                    android:text="상세정보"
                     android:fontFamily="@font/medium"
                     android:textSize="25dp"
+                    android:text="지도"
                     android:layout_weight="1"
                     tools:ignore="InvalidId" />
 
@@ -155,7 +155,9 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="350dp"
+                android:id="@+id/map_frame"
+                android:visibility="gone" >
 
                 <com.naver.maps.map.MapView
                     android:id="@+id/map_view"
@@ -164,6 +166,17 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/review_frame"
+                android:visibility="gone" >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </FrameLayout>
 
         </LinearLayout>
