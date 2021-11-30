@@ -3,6 +3,7 @@ package com.greener;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     private String TAG = "LoginActivity";
     private FirebaseAuth firebaseAuth;
     private BackPressHandler backPressHandler = new BackPressHandler(this);
-
     private Intent intent;
 
     @Override
@@ -46,7 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Call Next Activity
             intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("STD_NUM", SaveSharedPreference.getUserName(this).toString());
+            intent.putExtra("STD_NUM", SaveSharedPreference.getUserName(this));
+
+            Toast.makeText(this,"로그인 되었습니다."+SaveSharedPreference.getUserName(LoginActivity.this).length(), Toast.LENGTH_SHORT).show();
             startActivity(intent);
             this.finish();
         }
@@ -75,24 +77,19 @@ public class LoginActivity extends AppCompatActivity {
                     myStartActivity(FindPasswordActivity.class);
                     finish();
                     break;
-
-
-
             }
         }
     };
     @Override
     public void onBackPressed(){
-
         backPressHandler.onBackPressed("종료하려면 뒤로가기 버튼을 한번 더 누르세요", 3000);
-
     }
     private void login(){
         String email = ((EditText)findViewById(R.id.login_email)).getText().toString().trim();
         String password = ((EditText)findViewById(R.id.login_password)).getText().toString().trim();
-        CheckBox checkBox = findViewById(R.id.autoLoginCheck) ;
+        CheckBox checkBox = findViewById(R.id.autoLoginCheck);
 
-        //if(checkBox.isChecked() == true) SaveSharedPreference.setUserName(LoginActivity.this, email);
+        if(checkBox.isChecked() == true) SaveSharedPreference.setUserName(LoginActivity.this, email);
 
         if(email.length() >0 && password.length() >0){
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

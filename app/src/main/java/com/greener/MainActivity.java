@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -68,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static String uid;
     public static Context context_main;
+
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
