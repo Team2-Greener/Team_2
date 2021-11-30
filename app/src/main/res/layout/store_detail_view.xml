@@ -19,7 +19,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:background="@color/main_color"
                 android:weightSum="10">
@@ -32,8 +32,8 @@
 
                     <Button
                         android:id="@+id/btn_go_back"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/toleft"
@@ -43,11 +43,15 @@
                         android:id="@+id/store_detail_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:maxLines="1"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
                         android:layout_marginLeft="20dp"
                         android:gravity="center_vertical"
                         android:text="가게이름"
-                        android:textSize="45dp"
+                        android:textSize="40dp"
+                        android:fontFamily="@font/bold"
                         android:textColor="@color/dark_greener"/>
 
                 </LinearLayout>
@@ -110,7 +114,8 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/round_button1"
                     android:text="상세정보"
-                    android:textSize="30dp"
+                    android:fontFamily="@font/medium"
+                    android:textSize="25dp"
                     android:layout_weight="1"
                     tools:ignore="InvalidId" />
 
@@ -120,7 +125,8 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/round_button2"
                     android:text="리뷰"
-                    android:textSize="30dp"
+                    android:fontFamily="@font/medium"
+                    android:textSize="25dp"
                     android:layout_weight="1"
                     tools:ignore="InvalidId" />
 
@@ -133,7 +139,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:text="가게번호"
-                android:textSize="30dp" />
+                android:fontFamily="@font/medium"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/store_detail_address"
@@ -142,7 +149,9 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
                 android:text="가게주소"
-                android:textSize="30dp" />
+                android:fontFamily="@font/light"
+                android:textSize="15dp"
+                android:maxLines="2"/>
 
             <FrameLayout
                 android:layout_width="match_parent"

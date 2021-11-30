@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
         android:id="@+id/search_action"
         android:enabled="true"
         android:icon="@drawable/search"
+        android:iconTint="@color/dark_greener"
         android:title="search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.widget.SearchView"/>
@@ -15,6 +15,7 @@
         android:id="@+id/map_view_action"
         android:enabled="true"
         android:icon="@drawable/map"
+        android:iconTint="@color/dark_greener"
         android:title="map"
         app:showAsAction="ifRoom"/>
 

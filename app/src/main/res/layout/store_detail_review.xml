@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:background="@color/main_color" >
 
@@ -26,18 +26,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/toleft"
                 android:backgroundTint="@color/dark_greener"/>
-
-            <TextView
-                android:id="@+id/store_detail_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:gravity="center_vertical"
-                android:text="가게이름"
-                android:textSize="50dp"
-                android:textColor="@color/dark_greener"/>
-
-
+            
         </LinearLayout>
 
 
@@ -77,7 +66,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/round_button1"
                 android:text="상세정보"
-                android:textSize="30dp"
+                android:fontFamily="@font/medium"
+                android:textSize="25dp"
                 android:layout_weight="1"
                 tools:ignore="InvalidId" />
 
@@ -87,7 +77,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/round_button2"
                 android:text="리뷰"
-                android:textSize="30dp"
+                android:fontFamily="@font/medium"
+                android:textSize="25dp"
                 android:layout_weight="1"
                 tools:ignore="InvalidId" />
 
@@ -100,7 +91,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:text="가게번호"
-            android:textSize="30dp" />
+            android:fontFamily="@font/medium"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/store_detail_address"
@@ -109,7 +101,9 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:text="가게주소"
-            android:textSize="30dp" />
+            android:fontFamily="@font/light"
+            android:textSize="15dp"
+            android:maxLines="2"/>
 
     </LinearLayout>
 

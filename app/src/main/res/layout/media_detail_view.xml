@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/media_detail_topbar"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:background="@color/main_color" >
 
@@ -30,15 +30,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:text="content"
+        android:fontFamily="@font/medium"
         android:textColor="@color/dark_greener" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/media_detail_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:overScrollMode="never"
         android:scrollbars="vertical" />
 
