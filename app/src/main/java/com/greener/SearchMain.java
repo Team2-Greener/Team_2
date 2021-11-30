@@ -2,6 +2,7 @@ package com.greener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,13 +22,14 @@ import com.naver.maps.geometry.LatLng;
 import java.util.ArrayList;
 
 public class SearchMain extends AppCompatActivity {
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
-    private RecyclerView.Adapter adapter;
-    private ArrayList<StoreList> arrayList = new ArrayList<>();
 
     private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<StoreList> arrayList = new ArrayList<>();
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+
     private String searchStr;
 
     @Override
@@ -40,14 +42,15 @@ public class SearchMain extends AppCompatActivity {
 
         // System.out.println("검색 내용 : "+ searchStr);
 
-        recyclerView = findViewById(R.id.hotel_recyclerView); // 아디 연결
+        recyclerView = findViewById(R.id.search_recyclerView); // 아디 연결
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 기존성능 강화
 
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new GridLayoutManager(this,2);//두줄
         recyclerView.setLayoutManager(layoutManager);
 
-        arrayList = new ArrayList<>();
-        // arrayList.clear();
+        arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
+
+        arrayList.clear();
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("샵");
@@ -71,6 +74,10 @@ public class SearchMain extends AppCompatActivity {
             }
         });
 
+        adapter = new StoreViewAdapter(arrayList, this);
+        recyclerView.setAdapter(adapter);
+
+        /*
         databaseReference = database.getReference("호텔");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -98,5 +105,7 @@ public class SearchMain extends AppCompatActivity {
 
         adapter = new StoreViewAdapter(arrayList, this);
         recyclerView.setAdapter(adapter);
+
+         */
     }
 }

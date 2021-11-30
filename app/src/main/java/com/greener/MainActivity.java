@@ -63,12 +63,12 @@ public class MainActivity extends AppCompatActivity {
         fragNum = 0;
         //Toolbar 추가하기
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.greener); //로고 넣기
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);    //title 안보이게하기
 
         //화면 전환
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
