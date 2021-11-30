@@ -72,9 +72,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
         Save = findViewById(R.id.btn_to_save);
 
         mapFrame = findViewById(R.id.map_frame);
-        mapFrame.setVisibility(View.INVISIBLE);
         reviewFrame = findViewById(R.id.review_frame);
-        reviewFrame.setVisibility(View.INVISIBLE);
 
         Back.setOnClickListener(this);
         Map.setOnClickListener(this);
@@ -240,6 +238,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
             onBackPressed();
         }
         else if(id == R.id.store_detail_review) {
+            mapFrame.setVisibility(View.GONE);
             reviewFrame.setVisibility(View.VISIBLE);
             /*
             intent = new Intent(this, StoreDetailReview.class);
@@ -250,6 +249,7 @@ public class StoreDetailView extends AppCompatActivity implements View.OnClickLi
              */
         }
         else if(id == R.id.store_detail_map){
+            reviewFrame.setVisibility(View.GONE);
             mapFrame.setVisibility(View.VISIBLE);
         }
     }

@@ -147,7 +147,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:id="@+id/map_frame">
+                android:id="@+id/map_frame"
+                android:visibility="gone" >
 
                 <com.naver.maps.map.MapView
                     android:id="@+id/map_view"
@@ -161,7 +162,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/review_frame">
+                android:id="@+id/review_frame"
+                android:visibility="gone" >
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
