@@ -86,16 +86,7 @@ public class MediaDetailView extends AppCompatActivity implements View.OnClickLi
 
 
     public void onClick(View view) {
-
         onBackPressed();
-        /*
-        int id = view.getId();
-
-        if(id == R.id.btn_go_back) {
-            onBackPressed();
-        }
-
-         */
     }
 
 }
