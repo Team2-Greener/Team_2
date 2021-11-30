@@ -122,7 +122,7 @@
                 android:layout_marginRight="10dp"
                 android:textSize="20sp"
                 android:textColor="@color/dark_greener"
-                android:background="#FF"/>
+                android:background="#00FFFFFF"/>
 
             <TextView
                 android:id="@+id/delimiter"
@@ -141,7 +141,7 @@
                 android:id="@+id/login_findPwBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#FF"
+                android:background="#00FFFFFF"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:fontFamily="@font/light"
