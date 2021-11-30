@@ -7,6 +7,21 @@
     android:background="#00FFFFFF"
     android:orientation="vertical">
 
+    <com.naver.maps.map.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn"
+            android:background="@drawable/ic_gps" />
+    </com.naver.maps.map.MapView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/liked_map_frame"
         android:layout_width="match_parent"

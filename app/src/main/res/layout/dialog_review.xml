@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="리뷰 작성하기"
+        android:textSize="15sp"
+        android:gravity="center_horizontal"
+        />
+    <EditText
+        android:id="@+id/edit_review"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:inputType="textMultiLine"
+        android:hint="리뷰를 작성해주세요. (최대 300자)"
+        android:gravity="top"
+        android:scrollHorizontally="false"
+        android:maxLength="300"
+        />
+</LinearLayout>

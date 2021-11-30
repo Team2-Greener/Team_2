@@ -1,10 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <style name = "SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
     <!-- Base application theme. -->
     <style name="Theme.Greener" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/main_color</item>
-        <item name="colorPrimaryVariant">@color/dark_greenr</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/dark_greener</item>
+        <item name="colorAccent">@color/dark_greener</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -17,14 +20,22 @@
 
         <!-- Toolbar style. -->
         <item name="toolbarStyle">@style/ToolbarStyle.Dark</item>
+        <item name="toolbarNavigationButtonStyle">@style/ToolbarStyle.Dark</item>
+        <item name="android:actionOverflowButtonStyle">@style/ToolbarStyle.Dark</item>
 
         <!--Customize your theme here. -->
     </style>
     <!--Toolbar 스타일-->
     <style name="ToolbarStyle.Dark" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/main_color</item> <!-- Toolbar의 배경색-->
-        <item name="titleTextAppearance">@color/dark_greenr</item> <!-- Toolbar의 타이틀 텍스트-->
-        <item name="subtitleTextAppearance">@color/dark_greenr</item> <!-- Toolbar의 서브타이틀 텍스트-->
+        <item name="titleTextAppearance">@color/dark_greener</item> <!-- Toolbar의 타이틀 텍스트-->
+        <item name="subtitleTextAppearance">@color/dark_greener</item> <!-- Toolbar의 서브타이틀 텍스트-->
     </style>
+
+    <style name="AppTheme.OverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/dark_greener</item>
+    </style>
+
+
 
 </resources>

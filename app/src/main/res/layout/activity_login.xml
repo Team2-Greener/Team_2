@@ -1,88 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/login_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="login"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="50dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/black"
-        />
-    <EditText
-        android:id="@+id/login_email"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/login_text"
-        android:layout_centerHorizontal="true"
-        android:inputType="textVisiblePassword"
-        android:hint="Email" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/login_password"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/login_email"
-        android:layout_centerHorizontal="true"
-        android:inputType="textPassword"
-        android:hint="Password" />
+        <ImageView
+            android:id="@+id/login_logo"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30sp"
+            android:src="@drawable/greener" />
+
+        <LinearLayout
+            android:id="@+id/layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_logo"
+            android:layout_marginBottom="30sp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_gravity="center"
+                android:src="@drawable/email"
+                app:tint="@color/white" />
+
+            <EditText
+                android:id="@+id/login_email"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/medium"
+                android:hint="Email"
+                android:inputType="textVisiblePassword"
+                android:textColorHint="@color/darkGray"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_email"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_gravity="center"
+                android:src="@drawable/password"
+                app:tint="@color/white" />
+
+            <EditText
+                android:id="@+id/login_password"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/medium"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColorHint="@color/darkGray"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/autoLoginCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_password"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="left"
+            android:layout_marginLeft="45sp"
+            android:layout_marginTop="15sp"
+            android:fontFamily="@font/light"
+            android:text="자동로그인"
+            android:textColor="@color/dark_greener"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/login_loginButton"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/autoLoginCheck"
+            android:layout_marginTop="20sp"
+            android:background="@drawable/round_image"
+            android:fontFamily="@font/medium"
+            android:text="login"
+            android:textColor="@color/black"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/login_loginButton">
+
+            <Button
+                android:id="@+id/login_signupButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원 가입"
+                android:fontFamily="@font/light"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/dark_greener"
+                android:background="#00FFFFFF"/>
+
+            <TextView
+                android:id="@+id/delimiter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="|"
+                android:layout_gravity="center"
+                android:fontFamily="@font/light"
+                android:textSize="20sp"
+                android:textColor="@color/dark_greener"
+                android:layout_alignLeft="@+id/login_signupButton"
+                android:layout_alignRight="@id/login_findPwBtn"/>
 
 
-    <Button
-        android:layout_width="140dp"
-        android:layout_height="55dp"
-        android:text="로그인"
-        android:id="@+id/login_loginButton"
-        android:layout_below="@+id/login_password"
-        android:layout_alignStart="@+id/login_password"
-        android:background="@color/darkGray"
-        android:layout_alignLeft="@+id/login_password" />
+            <Button
+                android:id="@+id/login_findPwBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/light"
+                android:textSize="20sp"
+                android:textColor="@color/dark_greener"
+                android:text="비밀번호 찾기" />
 
-    <Button
-        android:id="@+id/login_signupButton"
-        android:layout_width="140dp"
-        android:layout_height="55dp"
-        android:text="회원 가입"
-        android:layout_alignTop="@+id/login_loginButton"
-        android:background="@color/darkGray"
-        android:layout_alignEnd="@+id/login_password"
-        android:layout_alignRight="@+id/login_password" />
+        </LinearLayout>
 
-    <CheckBox
-        android:text="자동로그인"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/login_signupButton"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/autoLoginCheck"
-        />
-
-    <TextView
-        android:id="@+id/login_findPW_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호를 잊으셨나요?"
-        android:textSize="15dp"
-        android:layout_below="@+id/autoLoginCheck"
-        android:layout_toLeftOf="@+id/login_findPwBtn"
-        android:textColor="@color/darkGray"/>
-
-    <Button
-        android:id="@+id/login_findPwBtn"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/autoLoginCheck"
-        android:layout_alignRight="@id/login_password"
-        android:background="@color/darkGray"
-        android:text="비밀번호 찾기" />
-
-
+    </LinearLayout>
 
 </RelativeLayout>
