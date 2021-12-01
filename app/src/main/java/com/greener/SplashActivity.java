@@ -11,7 +11,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 }

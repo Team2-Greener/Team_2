@@ -116,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                         else{
                             if(task.getException() != null){
-                                startToast("이미 등록된 이메일입니다.");
+                                // startToast("이미 등록된 이메일입니다.");
                             }
                         }
                     }
