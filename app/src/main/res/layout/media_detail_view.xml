@@ -25,16 +25,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/media_detail_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textSize="20sp"
-        android:text="content"
-        android:fontFamily="@font/medium"
-        android:textColor="@color/dark_greener" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/media_detail_recyclerView"
         android:layout_width="match_parent"

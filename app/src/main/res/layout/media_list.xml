@@ -36,6 +36,7 @@
         android:textSize="18sp"
         android:fontFamily="@font/medium"
         android:layout_marginTop="3dp"
+        android:maxLines="2"
         android:layout_below="@+id/mediaBackgroundView"
         android:layout_alignLeft="@+id/mediaBackgroundView"
         android:layout_alignRight="@+id/mediaBackgroundView"
