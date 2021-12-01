@@ -31,7 +31,6 @@ public class MediaDetailView extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference databaseReference;
 
     private Button Back;
-    private String Title;
     public static String Path;
 
     @Override
@@ -39,14 +38,10 @@ public class MediaDetailView extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.media_detail_view);
 
-        TextView MediaDetailTitle = findViewById(R.id.media_detail_title);
-
         Back = findViewById(R.id.btn_go_back);
         Back.setOnClickListener(this);
 
         Intent intent = getIntent();
-
-        MediaDetailTitle.setText(intent.getStringExtra("Title"));
 
         recyclerView = (RecyclerView)findViewById(R.id.media_detail_recyclerView);
         recyclerView.setHasFixedSize(true);     //리사이클러뷰 성능 강화
@@ -55,8 +50,6 @@ public class MediaDetailView extends AppCompatActivity implements View.OnClickLi
         recyclerView.setLayoutManager(layoutManager);
 
         arrayList = new ArrayList<MediaDetailList>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
-
-        Title = MediaDetailTitle.getText().toString();
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("환경정보").child(Path);

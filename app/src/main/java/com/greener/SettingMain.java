@@ -46,7 +46,7 @@ public class SettingMain extends Fragment {
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference, deleteReference;
     private ArrayList<UsersList> arrayList;
 
     private TextView setting_userid;
@@ -129,6 +129,9 @@ public class SettingMain extends Fragment {
                                 Toast.makeText(view.getContext(), "계정이 삭제 되었습니다.", Toast.LENGTH_LONG).show();
                             }
                         });
+                String path = "users/"+firebaseAuth.getUid();
+                deleteReference = database.getInstance().getReference();
+                deleteReference.child(path).removeValue();
                 intent = new Intent(view.getContext(), LoginActivity.class);
                 startActivity(intent);
                 removeFragment(SettingMain.this);
