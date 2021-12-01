@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 26
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.greener"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
